@@ -1,0 +1,149 @@
+﻿@model PFG.Inventory.Web.ViewModels.CreateOrEditAccountViewModel
+@{
+    Layout = null;
+    ViewBag.Title = "修改資料";
+    UserModel userModel = ViewBag.UserModel;
+    
+}
+
+<h3 class="header smaller lighter blue">
+    使用者管理
+    <small>
+        <i class="ace-icon fa fa-angle-double-right"></i>
+        @ViewBag.Title 
+    </small>
+</h3>
+
+
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="widget-box">
+            <div class="widget-header widget-header-flat">
+                <h4 class="widget-title smaller">
+                    <i class="ace-icon fa fa-quote-left smaller-80"></i>
+                    @ViewBag.Title 
+                </h4>
+            </div>
+            <div class="widget-body">
+                <div class="widget-main">
+                    <!-- main content area -->
+                    
+                    @using (Html.BeginForm("Save", null, null, FormMethod.Post, new { @id = "save-form", @class = "form-horizontal" }))
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Account, new { @class = "col-sm-2 control-label no-padding-right" })
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(x => x.Account, new { @class = "col-xs-10 col-sm-5", disabled = "disabled" })
+                            </div>
+                            <div class="col-sm-offset-6"></div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Name, new { @class = "col-sm-2 control-label no-padding-right" })
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(x => x.Name, new { @class = "col-xs-10 col-sm-5", placeholder = "請輸入姓名" })
+                                @Html.ValidationMessageFor(x=>x.Name)
+                            </div>
+                            <div class="col-sm-offset-6"></div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.PasswordHash, new { @class = "col-sm-2 control-label no-padding-right" })
+                            <div class="col-sm-4">
+                                @Html.PasswordFor(x => x.PasswordHash, new { @class = "col-xs-10 col-sm-5", placeholder = "請輸入長度4~12位數之間的密碼" })
+                                @Html.ValidationMessageFor(x => x.PasswordHash)
+                            </div>
+                            <div class="col-sm-offset-6"></div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.ConfirmPassword, new { @class = "col-sm-2 control-label no-padding-right" })
+                            <div class="col-sm-4">
+                                @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "col-xs-10 col-sm-5", placeholder = "請再輸入一次密碼" })
+                                @Html.ValidationMessageFor(x => x.ConfirmPassword)
+                            </div>
+                            <div class="col-sm-offset-6"></div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Email, new { @class = "col-sm-2 control-label no-padding-right" })
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(x => x.Email, new { @class = "col-xs-12 col-sm-7", placeholder = "請輸入Email" })
+                                @Html.ValidationMessageFor(x=>x.Email)
+                            </div>
+                            <div class="col-sm-offset-4"></div>
+                        </div>
+
+                        <hr />
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.UserRoles, new { @class = "col-sm-2 control-label no-padding-right" })
+                            <div class="col-sm-6">
+                                @foreach (var item in SelectListUtils.GetRoleOptions().ToSelectList(Model.UserRoles))
+                                {
+                                    <label>
+                                        <input name="UserRoles" class="ace" type="checkbox" value="@item.Value" @if (item.Selected) { <text> checked="checked" </text>  }>
+                                        <span class="lbl"> @item.Text</span>
+                                    </label>
+                                }                                       
+                            </div>
+                            <div class="col-sm-offset-4"></div>
+                        </div>
+
+                        <div class="clearfix form-actions">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button id="btnSave" class="btn btn-info" type="button">
+									<i class="ace-icon fa fa-check bigger-110"></i>
+									儲存
+								</button>
+
+                                <button id="btnCancel" class="btn" type="button">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    取消
+                                </button>
+                            </div>
+                        </div>
+                        <!-- hidden area -->
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(x => x.Account)
+                        @Html.HiddenFor(x => x.SaveMode)
+                        @Html.Hidden("PasswordOrg",Model.PasswordHash)
+                    }
+
+
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        
+        //表單處理
+        $("#save-form").submit(commonjs.success, commonjs.formSubmitHandler);
+
+        //儲存
+        $("#btnSave").click(function (e) {
+            $("#save-form").submit();
+            e.preventDefault();
+        })
+
+        //取消
+        $("#btnCancel").click(function (e) {
+            commonjs.goBack();
+            e.preventDefault();
+        })
+
+        //回填密碼
+        
+
+        $("#PasswordHash,#ConfirmPassword").val($("#PasswordOrg").val());
+    });
+</script>
+
+

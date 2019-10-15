@@ -1,0 +1,73 @@
+﻿@model PFG.Inventory.Web.ViewModels.InventoryStockListViewModels
+@{
+    Layout = null;
+    UserModel userModel = ViewBag.UserModel;
+    var resultInfo = Model.GridList.TotalItemCount == 0 ? "" : string.Format(Resources.StrPagerInfo, Model.GridList.TotalItemCount, Model.GridList.FirstItemOnPage, Model.GridList.LastItemOnPage);
+}
+
+<h5>
+    <small>資料結果 <span class="page-info">@resultInfo</span></small>
+</h5>
+
+<table class="table table-striped table-bordered table-hover dataTable">
+    <thead>
+        <tr>
+            <th class="text-center">外倉</th>
+            <th class="text-center">庫位</th>
+            <th class="text-center">產品批號</th>
+            <th class="text-center">等級</th>
+            <th class="text-center">箱號</th>
+            <th class="text-center">
+                淨重
+            </th>
+            <th class="text-center">
+                毛重
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (Model.GridList != null && Model.GridList.Count > 0)
+        {
+
+            foreach (var item in Model.GridList)
+            {
+
+                <text>
+                    <tr>
+                        <td>@item.WarehouseID</td>
+                        <td>@item.Location</td>
+                        <td>@item.ProductCode</td>
+                        <td>@item.Class</td>
+                        <td>@item.BoxNumber</td>
+                        <td>@item.NetWeight</td>
+                        <td>@item.GrossWeight</td>
+
+                    </tr>
+
+                </text>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7">
+                    查無資料
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<!-- hidden criteria -->
+@Html.Partial("_Criteria", Model)
+@Html.PagedListPager(Model.GridList, pageNo => Url.Action("Index", new
+{
+    pageNo,
+    Model.Parameters.PageSize,
+    Model.Parameters.DateStock,
+    Model.Parameters.WarehouseID,
+    Model.Parameters.Location,
+    Model.Parameters.IsMakeInventory
+}), SiteLibrary.GetDefaultPagerOptions(true))

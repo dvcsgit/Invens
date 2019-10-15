@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2baae682dd754917b37446ca22d7183b" Name="Diagram1">
+        <EntityTypeShape EntityType="PFGWarehouseModel.BasicSettingLoaction" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="PFGWarehouseModel.BasicSettingWarehouse" Width="1.5" PointX="4.75" PointY="4.75" />
+        <EntityTypeShape EntityType="PFGWarehouseModel.Operations" Width="1.5" PointX="0.75" PointY="1.875" />
+        <EntityTypeShape EntityType="PFGWarehouseModel.PermissionOperations" Width="1.5" PointX="3" PointY="1.625" />
+        <EntityTypeShape EntityType="PFGWarehouseModel.Users" Width="1.5" PointX="7.625" PointY="1" />
+        <AssociationConnector Association="PFGWarehouseModel.FK_dbo_PermissionOperations_dbo_Operations_OperationId" />
+        <EntityTypeShape EntityType="PFGWarehouseModel.Permissions" Width="1.5" PointX="0.75" PointY="8" />
+        <AssociationConnector Association="PFGWarehouseModel.FK_dbo_PermissionOperations_dbo_Permissions_PermissionId" />
+        <EntityTypeShape EntityType="PFGWarehouseModel.Roles" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="PFGWarehouseModel.RolePermissionOperations" />
+        <AssociationConnector Association="PFGWarehouseModel.UserRoles" />
+        <EntityTypeShape EntityType="PFGWarehouseModel.OutBoundInventory" Width="1.5" PointX="3.375" PointY="8.75" />
+        <EntityTypeShape EntityType="PFGWarehouseModel.BasicSettingCapacity" Width="1.5" PointX="9.375" PointY="5.75" />
+        <EntityTypeShape EntityType="PFGWarehouseModel.Inventory" Width="1.5" PointX="5.375" PointY="8.75" />
+        <EntityTypeShape EntityType="PFGWarehouseModel.UploadLogDetail" Width="1.5" PointX="9.625" PointY="9.5" />
+        <EntityTypeShape EntityType="PFGWarehouseModel.UploadLog" Width="1.5" PointX="7.375" PointY="14" />
+        <AssociationConnector Association="PFGWarehouseModel.FK_UploadLogDetail_UploadLog" />
+        <EntityTypeShape EntityType="PFGWarehouseModel.InventoryStock" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PFGWarehouseModel.MIS_Mapping_LOC" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="PFGWarehouseModel.MIS_Mapping_PDNO" Width="1.5" PointX="11.75" PointY="6.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

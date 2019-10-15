@@ -1,0 +1,35 @@
+﻿
+@model PFG.Inventory.Web.ViewModels.BasicSettingWarehouseViewModels
+@{
+    Layout = null;
+}
+
+<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle">
+    <span class="ui-dialog-title" id="ui-id-32">
+        <div class="widget-header">
+            <h4 class="smaller">
+                <i class="ace-icon fa fa-twitter-square green bigger-150"></i>
+                新建外倉
+            </h4>
+        </div>
+    </span>
+</div>
+
+<div class="modal-body">
+    @Html.Raw(Html.ValidationSummaryWithContainer("儲存失敗，請修正以下錯誤后，再試一次。"))
+    @using (Html.BeginForm("Create", "Warehouse", FormMethod.Post, new
+    {
+        @id = "add-form",
+        @class = "form-horizontal",
+        @role = "form"
+    }))
+    {
+        <fieldset>
+            @Html.Partial("_CreateOrEdit", Model)
+        </fieldset>
+    }
+</div>
+<div class="modal-footer">
+    <a class="btn btn-primary btn-save">存檔</a>
+    <a class="btn" data-dismiss="modal">關閉</a>
+</div>

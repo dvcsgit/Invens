@@ -1,0 +1,72 @@
+﻿@model PFG.Inventory.Web.ViewModels.BasicSettingWarehouseViewModels
+           @{
+               //Layout = null;
+           }
+@if (Model.WarehouseID!= null)
+{
+    @Html.HiddenFor(x => x.WarehouseID)
+    <div class="form-group">
+        @Html.LabelFor(x => x.WarehouseName, new { @class = "col-sm-3 control-label no-padding-right" })
+
+        <div class="col-sm-3 align-center middle">
+
+            @Html.DisplayFor(x => x.WarehouseName)
+            @Html.HiddenFor(x=>x.WarehouseName)
+        </div>
+    </div>
+    <div class="space-2"></div>
+    <div class="form-group">
+        
+        @Html.LabelFor(x => x.Capacity, new { @class = "control-label col-xs-12 col-sm-3 no-padding-right" })
+        
+        <div class="col-xs-12 col-sm-9">
+            <div class="clearfix">
+                @Html.TextBoxFor(x => x.Capacity, new { @class = "col-xs-12 col-sm-5", @placeholder = "輸入外倉容量" })
+                @*<i class="ace-icon fa fa-leaf green"></i>*@
+            </div>
+            @Html.ValidationMessageFor(x => x.Capacity, "", new { @class = "help-block " })
+        </div>
+    </div>
+    <div class="space-2"></div>
+    
+    <div class="form-group">
+        @Html.LabelFor(x => x.SumLocations, new { @class = "control-label col-xs-12 col-sm-3 no-padding-right" })
+
+        <div class="col-sm-9 col-sm-9">
+            <div class="clearfix">
+                @Html.TextBoxFor(x => x.SumLocations, new { @class = "col-xs-12 col-sm-5", @placeholder = "輸入外倉庫位數" })
+            </div>
+            @Html.ValidationMessageFor(x => x.SumLocations, "", new { @class = "help-block col-xs-12 col-sm-reset inline" })            
+        </div>
+
+    </div>
+    <div class="space-2"></div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.IsEnabled, new { @class="control-label col-xs-12 col-sm-3 no-padding-right"})
+        <div class="col-sm-9 col-sm-9">
+            <div class="clearfix">
+                @Html.CheckBoxFor(x => x.IsEnabled, new { @class=""})
+            </div>
+        </div>
+    </div>
+}
+else
+{
+
+}
+<script type="text/javascript">
+
+    $(function () {
+
+        var successHanlder = function () {
+            $('#showDialog').modal('hide');
+            location.href = "@Url.Action("Index")";
+        };
+
+        $("#add-form").submit(successHanlder, commonjs.formSubmitHandler);
+        
+        $(".btn-save").click(function () {
+            $("#add-form").submit();
+        });
+    });
+</script>

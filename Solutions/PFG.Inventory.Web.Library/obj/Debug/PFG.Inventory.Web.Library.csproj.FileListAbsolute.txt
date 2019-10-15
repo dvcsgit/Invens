@@ -1,0 +1,2 @@
+E:\GitRepository\pfg-inventory-server.git\Solutions\PFG.Inventory.Web.Library\obj\Debug\PFG.Inventory.Web.Library.csprojAssemblyReference.cache
+E:\GitRepository\pfg-inventory-server.git\Solutions\PFG.Inventory.Web.Library\obj\Debug\PFG.Inventory.Web.Library.csproj.CoreCompileInputs.cache

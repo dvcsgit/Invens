@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PFGWarehouseSSISModelStoreContainer" CdmEntityContainer="PFGWarehouseSSISEntities">
+    <EntitySetMapping Name="MIS_Stock">
+      <EntityTypeMapping TypeName="PFGWarehouseSSISModel.MIS_Stock">
+        <MappingFragment StoreEntitySet="MIS_Stock">
+          <ScalarProperty Name="Seq" ColumnName="Seq" />
+          <ScalarProperty Name="STK" ColumnName="STK" />
+          <ScalarProperty Name="ODNO" ColumnName="ODNO" />
+          <ScalarProperty Name="IT" ColumnName="IT" />
+          <ScalarProperty Name="PDNO" ColumnName="PDNO" />
+          <ScalarProperty Name="GD" ColumnName="GD" />
+          <ScalarProperty Name="UN" ColumnName="UN" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="WGT" ColumnName="WGT" />
+          <ScalarProperty Name="ARTS" ColumnName="ARTS" />
+          <ScalarProperty Name="UNPKMTWGT" ColumnName="UNPKMTWGT" />
+          <ScalarProperty Name="IKDAT" ColumnName="IKDAT" />
+          <ScalarProperty Name="DLDAT" ColumnName="DLDAT" />
+          <ScalarProperty Name="NRDLSHNO" ColumnName="NRDLSHNO" />
+          <ScalarProperty Name="PRTMK1" ColumnName="PRTMK1" />
+          <ScalarProperty Name="PRTMK2" ColumnName="PRTMK2" />
+          <ScalarProperty Name="TXDAT" ColumnName="TXDAT" />
+          <ScalarProperty Name="RESMK" ColumnName="RESMK" />
+          <ScalarProperty Name="ONWQTY" ColumnName="ONWQTY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MIS_Stock_His">
+      <EntityTypeMapping TypeName="PFGWarehouseSSISModel.MIS_Stock_His">
+        <MappingFragment StoreEntitySet="MIS_Stock_His">
+          <ScalarProperty Name="DateHistory" ColumnName="DateHistory" />
+          <ScalarProperty Name="ONWQTY" ColumnName="ONWQTY" />
+          <ScalarProperty Name="RESMK" ColumnName="RESMK" />
+          <ScalarProperty Name="TXDAT" ColumnName="TXDAT" />
+          <ScalarProperty Name="PRTMK2" ColumnName="PRTMK2" />
+          <ScalarProperty Name="PRTMK1" ColumnName="PRTMK1" />
+          <ScalarProperty Name="NRDLSHNO" ColumnName="NRDLSHNO" />
+          <ScalarProperty Name="DLDAT" ColumnName="DLDAT" />
+          <ScalarProperty Name="IKDAT" ColumnName="IKDAT" />
+          <ScalarProperty Name="UNPKMTWGT" ColumnName="UNPKMTWGT" />
+          <ScalarProperty Name="ARTS" ColumnName="ARTS" />
+          <ScalarProperty Name="WGT" ColumnName="WGT" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="UN" ColumnName="UN" />
+          <ScalarProperty Name="GD" ColumnName="GD" />
+          <ScalarProperty Name="PDNO" ColumnName="PDNO" />
+          <ScalarProperty Name="IT" ColumnName="IT" />
+          <ScalarProperty Name="ODNO" ColumnName="ODNO" />
+          <ScalarProperty Name="STK" ColumnName="STK" />
+          <ScalarProperty Name="Seq" ColumnName="Seq" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

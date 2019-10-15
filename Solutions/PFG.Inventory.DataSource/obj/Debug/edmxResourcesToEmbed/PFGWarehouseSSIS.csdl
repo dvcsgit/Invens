@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PFGWarehouseSSISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="MIS_Stock">
+    <Key>
+      <PropertyRef Name="Seq" />
+    </Key>
+    <Property Name="Seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="STK" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="ODNO" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="IT" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="PDNO" Type="String" MaxLength="39" FixedLength="false" Unicode="true" />
+    <Property Name="GD" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="UN" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="QTY" Type="Decimal" Precision="9" Scale="1" />
+    <Property Name="WGT" Type="Decimal" Precision="9" Scale="1" />
+    <Property Name="ARTS" Type="Decimal" Precision="6" Scale="0" />
+    <Property Name="UNPKMTWGT" Type="Decimal" Precision="8" Scale="4" />
+    <Property Name="IKDAT" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="DLDAT" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="NRDLSHNO" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="PRTMK1" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="PRTMK2" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="TXDAT" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="RESMK" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="ONWQTY" Type="Decimal" Precision="9" Scale="1" />
+  </EntityType>
+  <EntityContainer Name="PFGWarehouseSSISEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="MIS_Stock" EntityType="Self.MIS_Stock" />
+    <EntitySet Name="MIS_Stock_His" EntityType="PFGWarehouseSSISModel.MIS_Stock_His" />
+  </EntityContainer>
+  <EntityType Name="MIS_Stock_His">
+    <Key>
+      <PropertyRef Name="Seq" />
+    </Key>
+    <Property Name="Seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="STK" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="ODNO" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="IT" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="PDNO" Type="String" MaxLength="39" FixedLength="false" Unicode="true" />
+    <Property Name="GD" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="UN" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="QTY" Type="Decimal" Precision="9" Scale="1" />
+    <Property Name="WGT" Type="Decimal" Precision="9" Scale="1" />
+    <Property Name="ARTS" Type="Decimal" Precision="6" Scale="0" />
+    <Property Name="UNPKMTWGT" Type="Decimal" Precision="8" Scale="4" />
+    <Property Name="IKDAT" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="DLDAT" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="NRDLSHNO" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="PRTMK1" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="PRTMK2" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="TXDAT" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="RESMK" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="ONWQTY" Type="Decimal" Precision="9" Scale="1" />
+    <Property Name="DateHistory" Type="DateTime" Precision="3" />
+  </EntityType>
+</Schema>

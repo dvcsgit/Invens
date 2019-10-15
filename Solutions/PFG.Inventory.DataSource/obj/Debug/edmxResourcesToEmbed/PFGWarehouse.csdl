@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PFGWarehouseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="PFGWarehouseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BasicSettingLoaction" EntityType="PFGWarehouseModel.BasicSettingLoaction" />
+    <EntitySet Name="BasicSettingWarehouse" EntityType="PFGWarehouseModel.BasicSettingWarehouse" />
+    <EntitySet Name="Operations" EntityType="PFGWarehouseModel.Operations" />
+    <EntitySet Name="PermissionOperations" EntityType="PFGWarehouseModel.PermissionOperations" />
+    <EntitySet Name="Users" EntityType="PFGWarehouseModel.Users" />
+    <AssociationSet Name="FK_dbo_PermissionOperations_dbo_Operations_OperationId" Association="PFGWarehouseModel.FK_dbo_PermissionOperations_dbo_Operations_OperationId">
+      <End Role="Operations" EntitySet="Operations" />
+      <End Role="PermissionOperations" EntitySet="PermissionOperations" />
+    </AssociationSet>
+    <EntitySet Name="Permissions" EntityType="PFGWarehouseModel.Permissions" />
+    <AssociationSet Name="FK_dbo_PermissionOperations_dbo_Permissions_PermissionId" Association="PFGWarehouseModel.FK_dbo_PermissionOperations_dbo_Permissions_PermissionId">
+      <End Role="Permissions" EntitySet="Permissions" />
+      <End Role="PermissionOperations" EntitySet="PermissionOperations" />
+    </AssociationSet>
+    <EntitySet Name="Roles" EntityType="PFGWarehouseModel.Roles" />
+    <AssociationSet Name="RolePermissionOperations" Association="PFGWarehouseModel.RolePermissionOperations">
+      <End Role="PermissionOperations" EntitySet="PermissionOperations" />
+      <End Role="Roles" EntitySet="Roles" />
+    </AssociationSet>
+    <AssociationSet Name="UserRoles" Association="PFGWarehouseModel.UserRoles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <EntitySet Name="OutBoundInventory" EntityType="PFGWarehouseModel.OutBoundInventory" />
+    <EntitySet Name="BasicSettingCapacity" EntityType="PFGWarehouseModel.BasicSettingCapacity" />
+    <EntitySet Name="Inventory" EntityType="PFGWarehouseModel.Inventory" />
+    <EntitySet Name="UploadLogDetail" EntityType="PFGWarehouseModel.UploadLogDetail" />
+    <EntitySet Name="UploadLog" EntityType="PFGWarehouseModel.UploadLog" />
+    <AssociationSet Name="FK_UploadLogDetail_UploadLog" Association="PFGWarehouseModel.FK_UploadLogDetail_UploadLog">
+      <End Role="UploadLog" EntitySet="UploadLog" />
+      <End Role="UploadLogDetail" EntitySet="UploadLogDetail" />
+    </AssociationSet>
+    <EntitySet Name="InventoryStock" EntityType="PFGWarehouseModel.InventoryStock" />
+    <EntitySet Name="MIS_Mapping_LOC" EntityType="PFGWarehouseModel.MIS_Mapping_LOC" />
+    <EntitySet Name="MIS_Mapping_PDNO" EntityType="PFGWarehouseModel.MIS_Mapping_PDNO" />
+  </EntityContainer>
+  <EntityType Name="BasicSettingLoaction">
+    <Key>
+      <PropertyRef Name="WarehouseID" />
+      <PropertyRef Name="Location" />
+    </Key>
+    <Property Name="WarehouseID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="Int32" Nullable="false" />
+    <Property Name="CreatorAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <Property Name="ModifierAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateModified" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="BasicSettingWarehouse">
+    <Key>
+      <PropertyRef Name="WarehouseID" />
+    </Key>
+    <Property Name="WarehouseID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="WarehouseName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Capacity" Type="Int32" />
+    <Property Name="CreatorAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <Property Name="ModifierAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateModified" Type="DateTime" Precision="3" />
+    <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Operations">
+    <Key>
+      <PropertyRef Name="OperationID" />
+    </Key>
+    <Property Name="OperationID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PermissionOperations" Relationship="PFGWarehouseModel.FK_dbo_PermissionOperations_dbo_Operations_OperationId" FromRole="Operations" ToRole="PermissionOperations" />
+  </EntityType>
+  <EntityType Name="PermissionOperations">
+    <Key>
+      <PropertyRef Name="PermissionOperationID" />
+    </Key>
+    <Property Name="PermissionOperationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PermissionID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="OperationID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Operations" Relationship="PFGWarehouseModel.FK_dbo_PermissionOperations_dbo_Operations_OperationId" FromRole="PermissionOperations" ToRole="Operations" />
+    <NavigationProperty Name="Permissions" Relationship="PFGWarehouseModel.FK_dbo_PermissionOperations_dbo_Permissions_PermissionId" FromRole="PermissionOperations" ToRole="Permissions" />
+    <NavigationProperty Name="Roles" Relationship="PFGWarehouseModel.RolePermissionOperations" FromRole="PermissionOperations" ToRole="Roles" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Account" />
+    </Key>
+    <Property Name="Account" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateLastLogin" Type="DateTime" Precision="3" />
+    <Property Name="DateLastActivity" Type="DateTime" Precision="3" />
+    <Property Name="Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Ext" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="CreatorAccount" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifierAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateModified" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Roles" Relationship="PFGWarehouseModel.UserRoles" FromRole="Users" ToRole="Roles" />
+  </EntityType>
+  <Association Name="FK_dbo_PermissionOperations_dbo_Operations_OperationId">
+    <End Type="PFGWarehouseModel.Operations" Role="Operations" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="PFGWarehouseModel.PermissionOperations" Role="PermissionOperations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Operations">
+        <PropertyRef Name="OperationID" />
+      </Principal>
+      <Dependent Role="PermissionOperations">
+        <PropertyRef Name="OperationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Permissions">
+    <Key>
+      <PropertyRef Name="PermissionID" />
+    </Key>
+    <Property Name="PermissionID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="ParentID" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="PermissionName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Controller" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Weight" Type="Int32" Nullable="false" />
+    <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PermissionOperations" Relationship="PFGWarehouseModel.FK_dbo_PermissionOperations_dbo_Permissions_PermissionId" FromRole="Permissions" ToRole="PermissionOperations" />
+    <Property Name="Icon" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_dbo_PermissionOperations_dbo_Permissions_PermissionId">
+    <End Type="PFGWarehouseModel.Permissions" Role="Permissions" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="PFGWarehouseModel.PermissionOperations" Role="PermissionOperations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Permissions">
+        <PropertyRef Name="PermissionID" />
+      </Principal>
+      <Dependent Role="PermissionOperations">
+        <PropertyRef Name="PermissionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+    <Property Name="CreatorAccount" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifierAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateModified" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="PermissionOperations" Relationship="PFGWarehouseModel.RolePermissionOperations" FromRole="Roles" ToRole="PermissionOperations" />
+    <NavigationProperty Name="Users" Relationship="PFGWarehouseModel.UserRoles" FromRole="Roles" ToRole="Users" />
+  </EntityType>
+  <Association Name="RolePermissionOperations">
+    <End Type="PFGWarehouseModel.PermissionOperations" Role="PermissionOperations" Multiplicity="*" />
+    <End Type="PFGWarehouseModel.Roles" Role="Roles" Multiplicity="*" />
+  </Association>
+  <Association Name="UserRoles">
+    <End Type="PFGWarehouseModel.Roles" Role="Roles" Multiplicity="*" />
+    <End Type="PFGWarehouseModel.Users" Role="Users" Multiplicity="*" />
+  </Association>
+  <EntityType Name="OutBoundInventory">
+    <Key>
+      <PropertyRef Name="No" />
+    </Key>
+    <Property Name="No" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BoxNumber" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="WarehouseID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="Int32" Nullable="false" />
+    <Property Name="ProductCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Class" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="GrossWeight" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NetWeight" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CarNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StatusCode" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="CreatorAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <Property Name="ModifierAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateModified" Type="DateTime" Precision="3" />
+    <Property Name="UploadAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DataUpload" Type="DateTime" Precision="3" />
+    <Property Name="PrintFlag" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="MISFlag" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="MISTime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="BasicSettingCapacity">
+    <Key>
+      <PropertyRef Name="ProductCode" />
+    </Key>
+    <Property Name="ProductCode" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="CapacityProduct" Type="Decimal" Precision="3" Scale="2" />
+    <Property Name="CreatorAccount" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifierAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateModified" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Inventory">
+    <Key>
+      <PropertyRef Name="BoxNumber" />
+    </Key>
+    <Property Name="BoxNumber" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="WarehouseID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="Int32" Nullable="false" />
+    <Property Name="ProductCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Class" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="GrossWeight" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NetWeight" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Remark" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CarNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StatusCode" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="CreatorAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <Property Name="ModifierAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateModified" Type="DateTime" Precision="3" />
+    <Property Name="UploadAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DataUpload" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="UploadLogDetail">
+    <Key>
+      <PropertyRef Name="UploadLogDetailID" />
+    </Key>
+    <Property Name="UploadLogDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UploadLogID" Type="Int32" Nullable="false" />
+    <Property Name="LogType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Message" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="UploadLog" Relationship="PFGWarehouseModel.FK_UploadLogDetail_UploadLog" FromRole="UploadLogDetail" ToRole="UploadLog" />
+  </EntityType>
+  <EntityType Name="UploadLog">
+    <Key>
+      <PropertyRef Name="UploadLogID" />
+    </Key>
+    <Property Name="UploadLogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Account" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UploadFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="TempFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="DataUpload" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Flag" Type="Int32" Nullable="false" />
+    <Property Name="ExceptionMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TotalRecords" Type="Int32" />
+    <Property Name="ControllerName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Summary" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UploadLogDetail" Relationship="PFGWarehouseModel.FK_UploadLogDetail_UploadLog" FromRole="UploadLog" ToRole="UploadLogDetail" />
+  </EntityType>
+  <Association Name="FK_UploadLogDetail_UploadLog">
+    <End Type="PFGWarehouseModel.UploadLog" Role="UploadLog" Multiplicity="1" />
+    <End Type="PFGWarehouseModel.UploadLogDetail" Role="UploadLogDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UploadLog">
+        <PropertyRef Name="UploadLogID" />
+      </Principal>
+      <Dependent Role="UploadLogDetail">
+        <PropertyRef Name="UploadLogID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="InventoryStock">
+    <Key>
+      <PropertyRef Name="DateStock" />
+      <PropertyRef Name="BoxNumber" />
+    </Key>
+    <Property Name="DateStock" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="BoxNumber" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="WarehouseID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="Int32" Nullable="false" />
+    <Property Name="ProductCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Class" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="GrossWeight" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NetWeight" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Remark" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CarNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StatusCode" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="CreatorAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <Property Name="ModifierAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateModified" Type="DateTime" Precision="3" />
+    <Property Name="MakeInventory" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="UploadAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DataUpload" Type="DateTime" Precision="3" />
+    <Property Name="DateStockTime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="MIS_Mapping_LOC">
+    <Key>
+      <PropertyRef Name="PLANT" />
+      <PropertyRef Name="PDID" />
+      <PropertyRef Name="GD" />
+    </Key>
+    <Property Name="PLANT" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="PDID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="GD" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="LOC" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="CREATETIME" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="MIS_Mapping_PDNO">
+    <Key>
+      <PropertyRef Name="PLANT" />
+      <PropertyRef Name="PDID" />
+    </Key>
+    <Property Name="PLANT" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="PDID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="PDNO" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="CREATETIME" Type="DateTime" Precision="3" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,138 @@
+﻿@{
+
+    Layout = null;
+    var menu = MenuUtils.GetSubMenu(HttpContext.Current);
+    //左邊側欄
+    string currentController = Request.RequestContext.RouteData.Values["controller"].ToString();
+    string homeClass = currentController == "Home" ? "active" : "";
+    string debugClass = currentController == "UploadLog" ? "active open hsub" : "hsub";
+    
+}
+
+<div class="sidebar responsive" id="sidebar">
+    <script type="text/javascript">
+        try { ace.settings.check('sidebar', 'fixed') } catch (e) { }
+    </script>
+
+    @*<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+        <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+            <button class="btn btn-success">
+                <i class="ace-icon fa fa-signal"></i>
+            </button>
+
+            <button class="btn btn-info">
+                <i class="ace-icon fa fa-pencil"></i>
+            </button>
+
+            <!-- #section:basics/sidebar.layout.shortcuts -->
+            <button class="btn btn-warning">
+                <i class="ace-icon fa fa-users"></i>
+            </button>
+
+            <button class="btn btn-danger">
+                <i class="ace-icon fa fa-cogs"></i>
+            </button>
+
+            <!-- /section:basics/sidebar.layout.shortcuts -->
+        </div>
+
+        <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+            <span class="btn btn-success"></span>
+
+            <span class="btn btn-info"></span>
+
+            <span class="btn btn-warning"></span>
+
+            <span class="btn btn-danger"></span>
+        </div>
+    </div>*@
+
+    <!-- /.sidebar-shortcuts -->
+    <ul class="nav nav-list">
+        <li class="@homeClass">
+            <a href="@Url.Action("Index","Home")"><i class="menu-icon fa fa-home"></i><span class="menu-text"> 首頁</span></a>
+        </li>
+        
+        @foreach (var item in menu)
+        {
+            var topMenu = item.Value;
+            if (topMenu.Childrens.Count > 0)
+            {
+                <text>
+                <li class="@topMenu.ClassName">
+                                <a href=" #" class="dropdown-toggle">
+                    <i class="menu-icon fa @topMenu.Icon"></i>
+                    <span class="menu-text">@topMenu.Name </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <ul class="submenu">
+                        @foreach (var subMenu in topMenu.Childrens)
+                        {
+                            <li class="@subMenu.ClassName">
+                                <a href="@Url.Action(subMenu.Action, subMenu.Controller)">
+                                    <i class="icon-double-angle-right"></i>
+                                    @subMenu.Name
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+
+                </text>
+            }
+            else
+            {
+                if (topMenu.Action == "#" || topMenu.Controller == "#")
+                {
+                    <text>
+                        <li class="@topMenu.ClassName"><a href="#">@topMenu.Name</a></li>
+                    </text>
+                }
+                else
+                {
+                    <text>
+                        <li class="@topMenu.ClassName"><a href="@Url.Action(topMenu.Action, topMenu.Controller)"><i class="@topMenu.Icon"></i> @topMenu.Name</a></li>
+                    </text>
+                }
+            }
+
+
+
+        }
+
+        <!-- PowerUser -->
+        @if(SiteLibrary.IsPowerUser())
+        {
+            <text>
+            <li class="@debugClass">
+                <a href=" #" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-bug"></i>
+                    <span class="menu-text">除錯選單 </span>
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+                <ul class="submenu">
+                    <li class="">
+                        <a href="@Url.Action("Index", "UploadLog")">
+                            <i class="icon-double-angle-right"></i>
+                            上傳日誌
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            </text>
+        }
+
+    </ul>
+    <!-- /.nav-list -->
+
+    
+    <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse" style="z-index: 1;">
+		<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+	</div>
+    <script type="text/javascript">
+		try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+	</script>
+</div>
+
+

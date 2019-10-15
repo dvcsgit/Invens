@@ -1,0 +1,77 @@
+﻿@model bool
+@{
+    //權限選單模板
+    
+    //True 表示 disabled
+}
+<ul id="myTab" class="inbox-tabs nav nav-tabs padding-16 tab-size-bigger tab-space-1" data-bind="foreach: GridItems">
+    <li class="" data-bind="css: { active: $index() == 0 }">
+        <a data-toggle="tab" href="#" data-bind='attr: { href: "#" + MenuId }'>
+            <i data-bind="attr: { class : 'blue ace-icon fa bigger-130 ' + Icon } "></i>
+            <span class="bigger-110" data-bind="text:Name"></span>
+        </a>
+    </li>
+</ul>
+
+<div class="tab-content no-border no-padding" data-bind="foreach: GridItems">
+
+    <div class="tab-pane in" data-bind="attr:{ id: MenuId },css: { active: $index() == 0 }">
+        <div class="message-container">
+            <div id="id-message-list-navbar" class="message-navbar clearfix">
+                <div class="message-bar">
+
+                </div>
+
+                <div>
+                    <div class="messagebar-item-left">
+                        <label class="inline middle">
+                            <input type="checkbox" id="id-toggle-all" class="ace" data-bind="checked:MenuAllChecked" @if(Model){<text> disabled = "disabled" </text>}>
+                            <span class="lbl"></span>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- /section:pages/inbox.navbar -->
+            <div class="message-list-container">
+                <!-- #section:pages/inbox.message-list -->
+                <div class="message-list" id="message-list" data-bind="foreach:Childrens">
+                    <!-- #section:pages/inbox.message-list.item -->
+                    <div class="message-item">
+                        <div class="row">
+                            <div class="col-xs-2 col-sm-2">
+
+                                <label class="inline">
+                                    <input type="checkbox" class="ace" data-bind="checked:MenuOpAllChecked" @if(Model){<text> disabled = "disabled" </text>}>
+                                    <span class="lbl" data-bind="text:Name"></span>
+                                </label>
+
+                            </div>
+
+                            <div class="col-xs-10 col-sm-10">
+                                <span data-bind="foreach:MenuOperations">
+                                    <label class="inline light-border">
+                                        <input type="checkbox" name="PermissionList" class="ace" data-bind="checked:IsChecked,attr:{Value:PermissionOperationId}" @if(Model){<text> disabled = "disabled" </text>}>
+                                        <span class="lbl" data-bind="text:ChineseName"></span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- /section:pages/inbox.message-list -->
+            </div>
+
+
+            <div class="message-footer clearfix">
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

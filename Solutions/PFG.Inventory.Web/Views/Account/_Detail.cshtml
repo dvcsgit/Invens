@@ -1,0 +1,137 @@
+﻿@model PFG.Inventory.Web.ViewModels.DetailAccountViewModel
+@{
+    Layout = null;
+    ViewBag.Title = "詳細資料";
+    UserModel userModel = ViewBag.UserModel;
+    
+}
+
+<h3 class="header smaller lighter blue">
+    使用者管理
+    <small>
+        <i class="ace-icon fa fa-angle-double-right"></i>
+        詳細資料
+    </small>
+</h3>
+
+
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="widget-box">
+            <div class="widget-header widget-header-flat">
+                <h4 class="widget-title smaller">
+                    <i class="ace-icon fa fa-quote-left smaller-80"></i>
+                    詳細資料
+                </h4>
+            </div>
+            <div class="widget-body">
+                <div class="widget-main">
+                    <!-- main content area -->
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Account, new { @class = "col-sm-2 control-label no-padding-right" })
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(x => x.Account, new { @class = "col-xs-10 col-sm-5", disabled = "disabled" })
+                            </div>
+                            <div class="col-sm-offset-6"></div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Name, new { @class = "col-sm-2 control-label no-padding-right" })
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(x => x.Name, new { @class = "col-xs-10 col-sm-5", disabled = "disabled" })
+                            </div>
+                            <div class="col-sm-offset-6"></div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.PasswordHash, new { @class = "col-sm-2 control-label no-padding-right" })
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(x => x.PasswordHash, new { @class = "col-xs-10 col-sm-5", disabled = "disabled" })
+                            </div>
+                            <div class="col-sm-offset-6"></div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Email, new { @class = "col-sm-2 control-label no-padding-right" })
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(x => x.Email, new { @class = "col-xs-12 col-sm-7", disabled = "disabled" })
+                            </div>
+                            <div class="col-sm-offset-4"></div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.DateLastLogin, new { @class = "col-sm-2 control-label no-padding-right" })
+                            <div class="col-sm-6">
+                                @Html.TextBox("DateLastLogin", Model.DateLastLogin.HasValue ? Model.DateLastLogin.Value.ToString(Resources.StrDateTimeFormat) : "從未登入", new { @class = "col-xs-12 col-sm-7", disabled = "disabled" })
+                            </div>
+                            <div class="col-sm-offset-4"></div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.DateCreated, new { @class = "col-sm-2 control-label no-padding-right" })
+                            <div class="col-sm-6">
+                                @Html.TextBox("DateCreated", Model.DateCreated.ToString(Resources.StrDateTimeFormat), new { @class = "col-xs-12 col-sm-7", disabled = "disabled" })
+                            </div>
+                            <div class="col-sm-offset-4"></div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.DateModified, new { @class = "col-sm-2 control-label no-padding-right" })
+                            <div class="col-sm-6">
+                                @Html.TextBox("DateModified", Model.DateModified.HasValue ? Model.DateModified.Value.ToString(Resources.StrDateTimeFormat) : "", new { @class = "col-xs-12 col-sm-7", disabled = "disabled" })
+                            </div>
+                            <div class="col-sm-offset-4"></div>
+                        </div>
+
+                        <hr />
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.UserRoles, new { @class = "col-sm-2 control-label no-padding-right" })
+                            <div class="col-sm-6">
+                                @foreach (var item in SelectListUtils.GetRoleOptions().ToSelectList(Model.UserRoles))
+                                {
+                                    <label>
+                                        <input name="UserRoles" class="ace" type="checkbox" disabled="disabled" value="@item.Value" @if (item.Selected) { <text> checked="checked" </text>  }>
+                                        <span class="lbl"> @item.Text</span>
+                                    </label>
+                                }                                 
+                            </div>
+                            <div class="col-sm-offset-4"></div>
+                        </div>
+
+                        <div class="clearfix form-actions">
+                            <div class="col-md-offset-3 col-md-9">
+                                &nbsp; &nbsp; &nbsp;
+                                <button id="btnCancel" class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    取消
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        
+
+        $("#btnCancel").click(function (e) {
+            commonjs.goBack();
+            e.preventDefault();
+        })
+    });
+</script>
+
+

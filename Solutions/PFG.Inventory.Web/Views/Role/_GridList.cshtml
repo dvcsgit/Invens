@@ -1,0 +1,164 @@
+﻿@model PFG.Inventory.Web.ViewModels.RoleListViewModel
+@{
+    Layout = null;
+    UserModel userModel = ViewBag.UserModel;
+    var resultInfo = Model.GridList.TotalItemCount == 0 ? "" : string.Format(Resources.StrPagerInfo, Model.GridList.TotalItemCount, Model.GridList.FirstItemOnPage, Model.GridList.LastItemOnPage);
+}
+
+<h5>
+   <small>資料結果 <span class="page-info">@resultInfo</span></small> 
+</h5>
+<table class="table table-striped table-bordered table-hover dataTable">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>
+                群組代號
+            </th>
+            <th>
+                群組名稱
+            </th>
+            <th>
+                描述
+            </th>
+            <th>
+                主功能
+            </th>
+            <th>動作</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (Model.GridList != null && Model.GridList.Count > 0)
+        {
+            var idx = Model.GridList.FirstItemOnPage;
+            foreach (var item in Model.GridList)
+            {
+
+                <text>
+                    <tr>
+                        <td width="30">@(idx++)</td>
+                        <td width="100">@item.RoleId</td>
+                        <td width="100">@item.RoleName</td>
+                        <td width="100">@item.Description</td>
+                        <td></td>
+                        <td width="80">
+                            <div class="action-buttons">
+                                @if (userModel.Operation.HasFlag(EnumOperation.Query))
+                                {
+                                    <a class="btn-detail blue" href="@Url.Action("Detail", new { id = item.RoleId })">
+                                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                                    </a>
+                                }
+
+                                @if (userModel.Operation.HasFlag(EnumOperation.Edit))
+                                {
+                                    <a class="btn-edit green" href="@Url.Action("Edit", new { id = item.RoleId })">
+                                        <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                    </a>
+                                }
+                                
+                                @if (userModel.Operation.HasFlag(EnumOperation.Delete))
+                                {
+                                    if (item.IsDefault)
+                                    {
+                                        <a class="btn-delete grey disabled" title="此為預設權限,無法刪除" style="cursor:pointer">
+                                            <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn-delete red" href="@Url.Action("Delete", new { id = item.RoleId })">
+                                            <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                        </a>
+                                    }
+
+                                }
+
+                            </div>
+                        </td>
+                    </tr>
+                </text>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">
+                    查無資料
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<!-- hidden criteria -->
+@Html.Partial("_Criteria", Model) 
+@Html.PagedListPager(Model.GridList, pageNo => Url.Action("Query", new { pageNo }), SiteLibrary.GetDefaultPagerOptions(true))
+
+<script>
+
+    $(function () {
+
+        //Delete
+        $(".btn-delete").not(".disabled").click(function (e) {
+            commonjs.deleteHandler.call(this);
+            e.preventDefault();
+        });
+        
+        //Detail
+        $(".btn-detail").click(function (e) {
+            var link = $(this);
+            var url = link.attr('href');
+            commonjs.goToNextPage(link, url);
+            e.preventDefault();
+        });
+        
+
+        //Edit
+        $(".btn-edit").click(function (e) {
+            var link = $(this);
+            var url = link.attr('href');
+            commonjs.goToNextPage(link, url);
+            e.preventDefault();
+        });
+
+        //Sorting 
+        $(".btn-sort").click(function (e) {
+            var btn = $(this);
+            var default_setting = "None";
+            var sort_column = btn.attr("data-sort-column");
+            //把其他列的移除掉
+            $(".btn-sort").not(this).removeClass("sorting_asc").removeClass("sorting_desc").addClass("sorting");
+
+            if (btn.hasClass('sorting')) {
+
+                btn.removeClass('sorting').addClass('sorting_asc');
+                $("#Parameter_SortingField").val(sort_column);
+                $("#Parameter_SortingDirection").val("Asc");
+
+            } else if (btn.hasClass('sorting_asc')) {
+
+                btn.removeClass('sorting_asc').addClass('sorting_desc');
+                $("#Parameter_SortingField").val(sort_column);
+                $("#Parameter_SortingDirection").val("Desc");
+
+            } else if (btn.hasClass('sorting_desc')) {
+
+                btn.removeClass('sorting_desc').addClass('sorting_asc');
+                $("#Parameter_SortingField").val(sort_column);
+                $("#Parameter_SortingDirection").val("Asc");
+            }
+
+            $("#criteria-form").submit();
+
+            e.preventDefault();
+        });
+    });
+
+
+
+</script>
+
+

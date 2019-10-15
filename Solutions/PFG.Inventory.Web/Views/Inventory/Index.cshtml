@@ -1,0 +1,267 @@
+﻿@model PFG.Inventory.Web.ViewModels.InventoryListViewModels
+@{
+    
+    var title = MenuUtils.GetPageTitle(HttpContext.Current);
+    UserModel userModel = ViewBag.UserModel;
+}
+
+@section BreadCrumbs{
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-wrench"></i>
+                <a href="@Url.Action("Index")">基礎資料管理</a>
+            </li>
+            <li class="active">
+                <i class="icon-group"></i>
+                @title
+            </li>
+        </ul>
+    </div>
+}
+
+@section PageHeader{
+
+}
+
+<div id="item-index">
+    <h3 class="header smaller lighter blue">@title</h3>
+    <p>
+        @if (userModel.Operation.HasFlag(EnumOperation.Query))
+        {
+            <button id="queryBtn" class="btn btn-white btn-info btn-bold">
+                <i class="ace-icon fa fa-search bigger-120 blue"></i>
+                查詢
+            </button>
+        }
+        @if(userModel.Operation.HasFlag(EnumOperation.Export))
+        { 
+            <button id="btn-export" class="btn btn-white btn-default btn-bold">
+                <i class="ace-icon fa fa-download bigger-120 blue"></i>
+                匯出
+            </button>
+
+        }
+        @if(userModel.Operation.HasFlag(EnumOperation.Create|EnumOperation.Edit))
+        {
+            <button id="btn-save" class="btn btn-white btn-default btn-bold">
+                <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+                存檔
+            </button>
+        }
+    </p>
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="widget-box">
+                <div class="widget-header widget-header-flat">
+                    <h4 class="widget-title smaller">
+                        <i class="ace-icon fa fa-quote-left smaller-80"></i>
+                        查詢條件
+                    </h4>
+                    <div class="widget-toolbar">
+                        <a href="#" data-action="collapse">
+                            <i class="fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="widget-body">
+                    <div class="widget-main">
+                        @using (Ajax.BeginForm("Query", null, SiteLibrary.GetDefaultAjaxOptions(), new { @id = "query-form" }))
+                        {
+                            <div class="row">
+                                <div class="col-xs-1">
+                                    @Html.LabelFor(x => x.Parameters.WarehouseInfo)
+                                </div>
+                                <div class="col-xs-3">
+                                    @Html.TextBoxFor(x=>x.Parameters.WarehouseInfo)
+                                </div>
+                                <div class="col-xs-1">
+                                    @Html.LabelFor(x=>x.Parameters.EnterFlag)
+                                </div>
+                                <div class="col-xs-3">
+                                    @Html.TextBoxFor(x => x.Parameters.EnterFlag, new { @class = "editable-input input-large", @placeholder="請輸入註記"})
+                                </div>
+                                <div class="col-xs-1">
+                                    @Html.LabelFor(x=>x.Parameters.IsPointer)
+                                </div>
+                                <div>
+                                    @Html.CheckBoxFor(x => x.Parameters.IsPointer)
+                                </div>
+                            </div>
+                            <div class="row"><br /></div>
+                           <div class="row">
+                               <div class="col-xs-1">
+                                   @Html.LabelFor(x=>x.Parameters.Location)
+                               </div>
+                               <div class="col-xs-3">
+                                   @Html.TextBoxFor(x=>x.Parameters.Location)
+                               </div>
+                               <div class="col-xs-1">
+                                   @Html.LabelFor(x => x.Parameters.ProductCode)
+                               </div>
+                               <div class="col-xs-3">
+                                   @Html.TextBoxFor(x=>x.Parameters.ProductCode)
+                               </div>
+                               <div class="col-xs-1">
+                                   @Html.LabelFor(x => x.Parameters.Class)
+                               </div>
+                               <div class="col-xs-3">
+                                   @Html.TextBoxFor(x=>x.Parameters.Class)
+                               </div>
+                           </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div id="divGridView">
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="item-detail" style="display:none">
+</div>
+
+
+
+@section Scripts{
+    <script>
+
+    $(function () {
+        //Save 存檔 Edition2.0
+        $("#btn-save").click(function (e) {
+            var $form = $("#grid-list-form");
+            var param = $form.serializeArray();
+            if (!$form.valid || $form.valid()) {
+                $.ajax({
+                    url: '@Url.Action("Save")',
+                    dataType: 'json',
+                    type: "POST",
+                    traditional: true,
+                    async: false,
+                    data: param,
+                    success: function (data) {
+                        if (data.success) {
+                            $.Alert("註記完成", function () {
+                                $("#criteria-form").submit();
+                                e.preventDefault();
+                            }, "提示");
+                        } else {
+                            if (data.errors) {
+                                $.Alert(data.errors, function () {
+                                    $("#criteria-form").submit();
+                                    e.preventDefault();
+                                });
+                            } else {
+                                $.PopDialog("註記發生錯誤");
+                            }
+                        }
+                    }
+                });
+            }
+            e.preventDefault();
+        });
+
+        //Save 存檔 Edition1.0
+        @*$("#btn-save").click(function (e) {
+            //Application.showLoading();
+            var arrValue = new Array();
+            var arrText = new Array();
+            var textBox = $("#divGridView table input[type='text']");
+            var hiddenControl = $("#divGridView table input[type='hidden']");
+            var editRow = textBox.length;
+            if (editRow > 0) {
+                textBox.each(function () {
+
+                    arrText.push($(this).val());
+                    //this.parent("tr");
+                });
+                hiddenControl.each(function () {
+                    arrValue.push($(this).val());
+                });
+                var param = {};
+                param.value = arrValue;
+                param.text = arrText;
+                //$("#criteriaForm").submit();
+                //Application.hideLoading();
+                $.ajax({
+                    url: '@Url.Action("Save")',
+                    dataType: 'json',
+                    type: "POST",
+                    traditional: true,
+                    async: false,
+                    data: param,
+                    success: function (data) {
+                        if (data.success) {
+                            $.Alert("註記完成", function () {
+                                $("#criteria-form").submit();
+                                e.preventDefault();
+                            }, "提示");
+                        } else {
+                            if (data.errors) {
+                                $.Alert(data.errors, function () {
+                                    $("#criteria-form").submit();
+                                    e.preventDefault();
+                                });
+                            } else {
+                                $.PopDialog("註記發生錯誤");
+                            }
+                        }
+                    }
+                });
+            } else {
+                $.PopDialog("沒有找到需要註記的內容！");
+            }
+        });*@
+        //Query查詢
+        $("#queryBtn").click(function (e) {
+            var id = $("#Parameters_WarehouseInfo").val();
+            if (id == "" || id == undefined) {
+                $.Alert("請選擇外倉", null, "提示");
+                return;
+            }
+            $("#query-form").submit();
+            e.preventDefault();
+        });
+
+        //匯出
+        $("#btn-export").click(function (e) {
+            e.preventDefault();
+            commonjs.exportHandler($("#query-form"), "@Url.Action("Query")");
+        });
+
+        //Bind Select2
+        $("#Parameters_WarehouseInfo").select2(Application.select2("EX: 請選擇外倉", "250px", '@Url.Action("GetWarehouseID","Utils")'));
+        $("#Parameters_Location").select2(Application.select2("EX：請選擇庫位", "250px", "@Url.Action("GetLocation","Utils")", function (term, page) { return { term: term, pageSize: 10, pageNo: page, warehouseID: $("#Parameters_WarehouseInfo").val() }; }));
+        $("#Parameters_ProductCode").select2(Application.select2("EX: 請選擇產品批號", "250px", "@Url.Action("GetProductCode", "Utils")", function (term, page) { return { term: term, pageSize: 10, pageNo: page, warehouseID: $("#Parameters_WarehouseInfo").val(), location: $("#Parameters_Location").val() }; }));
+        $("#Parameters_Class").select2(Application.select2("EX: 請選擇等級", "250px", "@Url.Action("GetClass","Utils")", function (term, page) { return { term: term, pageSize: 10, pageNo: page, warehouseID: $("#Parameters_WarehouseInfo").val(), location: $("#Parameters_Location").val(), productCode: $("#Parameters_ProductCode").val() }; }));
+
+        //Reset
+        $("#Parameters_WarehouseInfo").change(function (e) {
+            $("#Parameters_Location,#Parameters_ProductCode,#Parameters_Class").select2("val", null);
+            e.preventDefault();
+        });
+
+        $("#Parameters_Location").change(function (e) {
+            $("#Parameters_ProductCode,#Parameters_Class").select2("val", null);
+            e.preventDefault();
+        });
+
+        $("#Parameters_ProductCode").change(function (e) {
+            $("#Parameters_Class").select2("val", null);
+            e.preventDefault();
+        });
+
+
+    });
+</script>
+}

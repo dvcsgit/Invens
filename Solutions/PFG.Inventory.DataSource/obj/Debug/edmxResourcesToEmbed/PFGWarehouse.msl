@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PFGWarehouseModelStoreContainer" CdmEntityContainer="PFGWarehouseEntities">
+    <EntitySetMapping Name="BasicSettingLoaction">
+      <EntityTypeMapping TypeName="PFGWarehouseModel.BasicSettingLoaction">
+        <MappingFragment StoreEntitySet="BasicSettingLoaction">
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="ModifierAccount" ColumnName="ModifierAccount" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="CreatorAccount" ColumnName="CreatorAccount" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BasicSettingWarehouse">
+      <EntityTypeMapping TypeName="PFGWarehouseModel.BasicSettingWarehouse">
+        <MappingFragment StoreEntitySet="BasicSettingWarehouse">
+          <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="ModifierAccount" ColumnName="ModifierAccount" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="CreatorAccount" ColumnName="CreatorAccount" />
+          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+          <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
+          <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Operations">
+      <EntityTypeMapping TypeName="PFGWarehouseModel.Operations">
+        <MappingFragment StoreEntitySet="Operations">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="OperationID" ColumnName="OperationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PermissionOperations">
+      <EntityTypeMapping TypeName="PFGWarehouseModel.PermissionOperations">
+        <MappingFragment StoreEntitySet="PermissionOperations">
+          <ScalarProperty Name="OperationID" ColumnName="OperationID" />
+          <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+          <ScalarProperty Name="PermissionOperationID" ColumnName="PermissionOperationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="PFGWarehouseModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="ModifierAccount" ColumnName="ModifierAccount" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="CreatorAccount" ColumnName="CreatorAccount" />
+          <ScalarProperty Name="Ext" ColumnName="Ext" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="DateLastActivity" ColumnName="DateLastActivity" />
+          <ScalarProperty Name="DateLastLogin" ColumnName="DateLastLogin" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Account" ColumnName="Account" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Permissions">
+      <EntityTypeMapping TypeName="PFGWarehouseModel.Permissions">
+        <MappingFragment StoreEntitySet="Permissions">
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Controller" ColumnName="Controller" />
+          <ScalarProperty Name="PermissionName" ColumnName="PermissionName" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="PFGWarehouseModel.Roles">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="ModifierAccount" ColumnName="ModifierAccount" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="CreatorAccount" ColumnName="CreatorAccount" />
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="RolePermissionOperations" TypeName="PFGWarehouseModel.RolePermissionOperations" StoreEntitySet="RolePermissionOperations">
+      <EndProperty Name="Roles">
+        <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+      </EndProperty>
+      <EndProperty Name="PermissionOperations">
+        <ScalarProperty Name="PermissionOperationID" ColumnName="PermissionOperationID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserRoles" TypeName="PFGWarehouseModel.UserRoles" StoreEntitySet="UserRoles">
+      <EndProperty Name="Users">
+        <ScalarProperty Name="Account" ColumnName="Account" />
+      </EndProperty>
+      <EndProperty Name="Roles">
+        <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="OutBoundInventory">
+      <EntityTypeMapping TypeName="PFGWarehouseModel.OutBoundInventory">
+        <MappingFragment StoreEntitySet="OutBoundInventory">
+          <ScalarProperty Name="MISTime" ColumnName="MISTime" />
+          <ScalarProperty Name="MISFlag" ColumnName="MISFlag" />
+          <ScalarProperty Name="PrintFlag" ColumnName="PrintFlag" />
+          <ScalarProperty Name="DataUpload" ColumnName="DataUpload" />
+          <ScalarProperty Name="UploadAccount" ColumnName="UploadAccount" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="ModifierAccount" ColumnName="ModifierAccount" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="CreatorAccount" ColumnName="CreatorAccount" />
+          <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+          <ScalarProperty Name="CarNo" ColumnName="CarNo" />
+          <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+          <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+          <ScalarProperty Name="Class" ColumnName="Class" />
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+          <ScalarProperty Name="BoxNumber" ColumnName="BoxNumber" />
+          <ScalarProperty Name="No" ColumnName="No" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BasicSettingCapacity">
+      <EntityTypeMapping TypeName="PFGWarehouseModel.BasicSettingCapacity">
+        <MappingFragment StoreEntitySet="BasicSettingCapacity">
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="ModifierAccount" ColumnName="ModifierAccount" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="CreatorAccount" ColumnName="CreatorAccount" />
+          <ScalarProperty Name="CapacityProduct" ColumnName="CapacityProduct" />
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Inventory">
+      <EntityTypeMapping TypeName="PFGWarehouseModel.Inventory">
+        <MappingFragment StoreEntitySet="Inventory">
+          <ScalarProperty Name="DataUpload" ColumnName="DataUpload" />
+          <ScalarProperty Name="UploadAccount" ColumnName="UploadAccount" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="ModifierAccount" ColumnName="ModifierAccount" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="CreatorAccount" ColumnName="CreatorAccount" />
+          <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+          <ScalarProperty Name="CarNo" ColumnName="CarNo" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+          <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+          <ScalarProperty Name="Class" ColumnName="Class" />
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+          <ScalarProperty Name="BoxNumber" ColumnName="BoxNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UploadLogDetail">
+      <EntityTypeMapping TypeName="PFGWarehouseModel.UploadLogDetail">
+        <MappingFragment StoreEntitySet="UploadLogDetail">
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="LogType" ColumnName="LogType" />
+          <ScalarProperty Name="UploadLogID" ColumnName="UploadLogID" />
+          <ScalarProperty Name="UploadLogDetailID" ColumnName="UploadLogDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UploadLog">
+      <EntityTypeMapping TypeName="PFGWarehouseModel.UploadLog">
+        <MappingFragment StoreEntitySet="UploadLog">
+          <ScalarProperty Name="Summary" ColumnName="Summary" />
+          <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
+          <ScalarProperty Name="TotalRecords" ColumnName="TotalRecords" />
+          <ScalarProperty Name="ExceptionMessage" ColumnName="ExceptionMessage" />
+          <ScalarProperty Name="Flag" ColumnName="Flag" />
+          <ScalarProperty Name="DataUpload" ColumnName="DataUpload" />
+          <ScalarProperty Name="TempFileName" ColumnName="TempFileName" />
+          <ScalarProperty Name="UploadFileName" ColumnName="UploadFileName" />
+          <ScalarProperty Name="Account" ColumnName="Account" />
+          <ScalarProperty Name="UploadLogID" ColumnName="UploadLogID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InventoryStock">
+      <EntityTypeMapping TypeName="PFGWarehouseModel.InventoryStock">
+        <MappingFragment StoreEntitySet="InventoryStock">
+          <ScalarProperty Name="DateStockTime" ColumnName="DateStockTime" />
+          <ScalarProperty Name="DataUpload" ColumnName="DataUpload" />
+          <ScalarProperty Name="UploadAccount" ColumnName="UploadAccount" />
+          <ScalarProperty Name="MakeInventory" ColumnName="MakeInventory" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="ModifierAccount" ColumnName="ModifierAccount" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="CreatorAccount" ColumnName="CreatorAccount" />
+          <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+          <ScalarProperty Name="CarNo" ColumnName="CarNo" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+          <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+          <ScalarProperty Name="Class" ColumnName="Class" />
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+          <ScalarProperty Name="BoxNumber" ColumnName="BoxNumber" />
+          <ScalarProperty Name="DateStock" ColumnName="DateStock" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MIS_Mapping_LOC">
+      <EntityTypeMapping TypeName="PFGWarehouseModel.MIS_Mapping_LOC">
+        <MappingFragment StoreEntitySet="MIS_Mapping_LOC">
+          <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+          <ScalarProperty Name="LOC" ColumnName="LOC" />
+          <ScalarProperty Name="GD" ColumnName="GD" />
+          <ScalarProperty Name="PDID" ColumnName="PDID" />
+          <ScalarProperty Name="PLANT" ColumnName="PLANT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MIS_Mapping_PDNO">
+      <EntityTypeMapping TypeName="PFGWarehouseModel.MIS_Mapping_PDNO">
+        <MappingFragment StoreEntitySet="MIS_Mapping_PDNO">
+          <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+          <ScalarProperty Name="PDNO" ColumnName="PDNO" />
+          <ScalarProperty Name="PDID" ColumnName="PDID" />
+          <ScalarProperty Name="PLANT" ColumnName="PLANT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

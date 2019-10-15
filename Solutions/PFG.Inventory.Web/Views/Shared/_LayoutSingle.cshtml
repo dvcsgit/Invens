@@ -1,0 +1,25 @@
+﻿@{
+    var title = SiteLibrary.AppSettings("SystemTitle");
+}
+<html>
+<head>
+    @Html.Partial("_Header")
+</head>
+
+<body class="login-layout light-login">
+
+    <div class="main-container">
+        <div class="main-content">
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+
+                    <!-- page content goes here -->
+                    @RenderBody()
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.main-content -->
+    </div><!-- /.main-container -->
+    @Html.Partial("_Script")
+    @RenderSection("Scripts", false)
+</body>
+</html>

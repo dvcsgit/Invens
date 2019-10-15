@@ -1,0 +1,9 @@
+﻿@model PFG.Inventory.Web.ViewModels.BasicSettingCapacityListViewModels
+@{
+    Layout = null;
+}
+@using (Ajax.BeginForm("Index", null, SiteLibrary.GetDefaultAjaxOptions(), new { @id = "criteria-form" }))
+{
+    @Html.HiddenEntirelyFor(x => x.Parameters)
+
+}

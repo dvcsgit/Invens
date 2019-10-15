@@ -1,0 +1,109 @@
+﻿
+@model PFG.Inventory.Web.ViewModels.CompareListViewModels
+@{
+    Layout = null;
+    UserModel userModel = ViewBag.UserModel;
+    //var resultInfo = Model.GridList.Count() == 0 ? "" : string.Format(Resources.StrPagerInfo, Model.GridList.Count(), Model.GridList.First(), Model.GridList.Last());
+    
+}
+
+<h5>
+    <small>資料結果 <span class="page-info">@*@resultInfo*@</span></small>
+</h5>
+
+<table class="table table-bordered table-striped table-hover dataTable">
+    <thead>
+        <tr>
+            <th rowspan="2" class="text-center">外倉</th>
+            <th colspan="5" class="text-center">ERP</th>
+            <th colspan="5" class="text-center">外倉系統</th>
+            <th colspan="3" class="text-center">差筆</th>
+        </tr>
+        <tr>
+            <th class="text-center">產品批號</th>
+            <th class ="text-center">等級</th>
+            <th class="text-center">
+                淨重
+            </th>
+            <th class="text-center">毛重</th>
+            <th class="text-center">箱數</th>
+            <th class="text-center">產品批號</th>
+            <th class="text-center">等級</th>
+            <th class="text-center">
+                淨重
+            </th>
+            <th class="text-center">毛重</th>
+            <th class="text-center">箱數</th>
+            <th class="text-center">淨重</th>
+            <th class="text-center">毛重</th>
+            <th class="text-center">箱數</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (Model.GridList != null && Model.GridList.Count > 0)
+        {
+            foreach (var item in Model.GridList)
+            {
+
+                <text>
+        @if(item.Pointer==1)
+        { 
+                    <tr>
+                        <td>@item.WarehouseID</td>
+                        <td>@item.PDNO</td>
+                        <td>@item.GD</td>
+                        <td>@item.SumQTY</td>
+                        <td>@item.SumWGT</td>
+                        <td>@item.SumARTS</td>
+                        <td>@item.ProductCode</td>
+                        <td>@item.Class</td>
+                        <td>@item.SumNetWeight</td>
+                        <td>@item.SumGrossWeight</td>
+                        <td>@item.BoxCount</td>
+                        <td>@item.DiffNetWeight</td>
+                        <td>@item.DiffGrossWeight</td>
+                        <td>@item.DiffBoxCount</td>
+                    </tr>
+        }
+        else { 
+                        <tr style="color:red; font-weight:500;">
+                            <td>@item.WarehouseID</td>
+                            <td  >@item.PDNO</td>
+                            <td  >@item.GD</td>
+                            <td  >@item.SumQTY</td>
+                            <td  >@item.SumWGT</td>
+                            <td  >@item.SumARTS</td>
+                            <td  >@item.ProductCode</td>
+                            <td  >@item.Class</td>
+                            <td  >@item.SumNetWeight</td>
+                            <td  >@item.SumGrossWeight</td>
+                            <td  >@item.BoxCount</td>
+                            <td>@item.DiffNetWeight</td>
+                            <td>@item.DiffGrossWeight</td>
+                            <td>@item.DiffBoxCount</td>
+                        </tr>
+        }
+                    </text>
+
+                }
+            }
+        else
+        {
+            <tr>
+                <td colspan="13">
+                    查無資料
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- hidden criteria -->
+@*@Html.Partial("_Criteria", Model)*@
+@*@Html.PagedListPager(Model.GridList, pageNo => Url.Action("Query", new
+{
+    pageNo,
+    Model.Pararmeters.PageSize,
+    Model.Pararmeters.WarehouseID
+}), SiteLibrary.GetDefaultPagerOptions(true))*@

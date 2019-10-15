@@ -1,0 +1,117 @@
+﻿@{
+    var title = SiteLibrary.AppSettings("SystemTitle");
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @Html.Partial("_Header")
+</head>
+
+<body class="skin-3 no-skin">
+    <!-- navbar goes here -->
+    <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+        <script type="text/javascript">
+            try { ace.settings.check('navbar', 'fixed') } catch (e) { }
+        </script>
+
+        <div class="navbar-container" id="navbar-container">
+            <!-- #section:basics/sidebar.mobile.toggle -->
+            <button type="button" class="navbar-toggle menu-toggler pull-left fixed" id="menu-toggler">
+                <span class="sr-only">Toggle sidebar</span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- /section:basics/sidebar.mobile.toggle -->
+            <div class="navbar-header pull-left">
+                <!-- #section:basics/navbar.layout.brand -->
+                <a href="@Url.Action("Index","Home")" class="navbar-brand">
+                    <small>
+                        @title
+                    </small>
+                </a>
+
+                <!-- /section:basics/navbar.layout.brand -->
+                <!-- #section:basics/navbar.toggle -->
+                <!-- /section:basics/navbar.toggle -->
+            </div>
+
+            <!-- #section:basics/navbar.dropdown -->
+            <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                <ul class="nav ace-nav">
+
+                    <!-- #section:basics/navbar.user_menu -->
+                    <li class="light-blue">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                            <img class="nav-user-photo" src="@Url.Content("~/Content/images/user.png")" alt="Jason's Photo">
+                            <span class="user-info">
+                                <small>歡迎,</small>
+                                @User.Identity.Name
+                            </span>
+
+                            <i class="ace-icon fa fa-caret-down"></i>
+                        </a>
+
+                        <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            @*<li>
+                                <a href="@Url.Action("Index", "Profile")"><i class="ace-icon fa fa-user"></i>&nbsp;&nbsp;查看個人資訊</a>
+                            </li>
+                            <li class="divider"></li>*@
+                            <li>
+                                <a href="@Url.Action("LogOff", "Login")"><i class="ace-icon fa fa-power-off"></i>&nbsp;&nbsp;登出</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- /section:basics/navbar.user_menu -->
+                </ul>
+            </div>
+
+            <!-- /section:basics/navbar.dropdown -->
+        </div><!-- /.navbar-container -->
+    </div>
+
+
+    <div class="main-container" id="main-container">
+        <!-- #section:basics/sidebar -->
+        @Html.Partial("_SiteBarMenu")
+
+        <div class="main-content">
+            <!-- breadcrumbs goes here -->
+            @RenderSection("BreadCrumbs", required: false)
+
+            <div class="page-content">
+
+                <div class="page-content-area">
+                    <!-- page-header -->
+                    @RenderSection("PageHeader", required: false)
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <!-- page content goes here -->
+                            @RenderBody()
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div>
+            </div><!-- /.page-content -->
+        </div><!-- /.main-content -->
+        <!-- footer area -->
+
+    </div><!-- /.main-container -->
+
+    <div id="item-detail2" style="position: absolute; top: 0px; left: 0px; background-color: rgb(45,45,45); z-index: 5000; opacity: 0.2; display: none; background-position: initial initial; background-repeat: initial initial; text-align:center;vertical-align:middle;">
+        
+    </div>
+    <div id="item-detail2-text" style="position: absolute; top: 0px; left: 0px; z-index: 5001; display: none; background-position: initial initial; background-repeat: initial initial; text-align:center;vertical-align:middle;font-size:18px;" class="orange">
+        出表整理中...
+        </div>
+        <!-- list of script files -->
+        @Html.Partial("_Script")
+        @RenderSection("Scripts", false)
+
+</body>
+</html>
+

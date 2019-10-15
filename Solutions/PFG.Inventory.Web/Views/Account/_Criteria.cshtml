@@ -1,0 +1,8 @@
+﻿@model PFG.Inventory.Web.ViewModels.AccountListViewModel
+@{
+    Layout = null;
+}
+@using (Ajax.BeginForm("Query", null ,SiteLibrary.GetDefaultAjaxOptions(),new { @id = "criteria-form" }))
+{
+    @Html.HiddenEntirelyFor(x=>x.Parameter)
+}

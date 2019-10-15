@@ -1,0 +1,993 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable
+  DTS:refId="Package" xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:CreatorName="DL380G8\Administrator"
+  DTS:CreatorComputerName="DL380G8"
+  DTS:CreationDate="11/26/2014 11:16:56 AM"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{B3250439-C5E1-4125-883F-39A2997BFA78}"
+  DTS:LastModifiedProductVersion="11.0.2100.60"
+  DTS:LocaleID="1028"
+  DTS:ObjectName="庫存"
+  DTS:DTSID="{1B40AD22-4338-4DAC-B303-5791B9B5F9E6}"
+  DTS:CreationName="SSIS.Package.3">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MISUXUG00S2]"
+      DTS:ObjectName="MISUXUG00S2"
+      DTS:DTSID="{6DBC8622-F8F2-40F7-B839-50382EFC1170}"
+      DTS:CreationName="ADO.NET:System.Data.OracleClient.OracleConnection, System.Data.OracleClient, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=TPRS03A;User ID=UXUG00S2;Persist Security Info=True;Unicode=True;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAmDlCE4zPjEicCvcGITL8jQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACRUpoZIPIRt2ysBhbyltW14wISr27HO0GODJqL56MQHAAAAAAOgAAAAAIAACAAAAC3yCJ8bmvPnL5nH5rdYYF3OV720z/lJWv4kk9UoNcMYCAAAABYgJq0+ncmpj2BfZxVtjA49QY+bno6tUN46ehxQm+9LkAAAAC5yMahU7qFLz0RTEV0vhkw3NMOlu7JpFMcnhPZc895CexVpzP9EMt9DkGAPzA5n8Y57btD2ghlHpERMyNjUoRA</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[PFGWarehouseSSIS]"
+      DTS:ObjectName="PFGWarehouseSSIS"
+      DTS:DTSID="{77A2925C-18C1-46A8-842A-1CC16802EF53}"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=172.24.4.93;User ID=sa;Initial Catalog=PFGWarehouseSSIS;Persist Security Info=True;Application Name=SSIS-庫存-{77A2925C-18C1-46A8-842A-1CC16802EF53}172.24.4.93.PFGWarehouseSSIS.sa;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAmDlCE4zPjEicCvcGITL8jQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABui7yLTI2ouaqVVYtCcBkKLrV+DLb+jgtorZLIJcHNWQAAAAAOgAAAAAIAACAAAAAgd6o+JG7gSYX+GQAWNlLM3pPMbvAgxeCBsfxjZ1zijCAAAAAVLT11oDk6JlsOPn+HHYjyyuR4IF+L5YxOH7AXAWJujUAAAACx33jdR9kOoPP2EYSo7POog7aOb0KVlCBnQ3DID2z0iaFE+F+RcnhvFrl+AXTjDWG2NX6xJa7GZ9W6IRGrWhqm</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\刪掉資料"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="刪掉資料"
+      DTS:DTSID="{354ad417-32dc-4860-9ca9-b50781ed8322}"
+      DTS:Description="執行 SQL 工作"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{77A2925C-18C1-46A8-842A-1CC16802EF53}"
+          SQLTask:SqlStatementSource="DELETE FROM dbo.MIS_Stock;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\庫存"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="庫存"
+      DTS:DTSID="{cdff19a2-42ef-4cc9-b30c-68f5a60790d5}"
+      DTS:Description="資料流程工作"
+      DTS:CreationName="SSIS.Pipeline.3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\庫存\ADO NET 目的地"
+              name="ADO NET 目的地"
+              componentClassID="{874F7595-FB5F-40FF-96AF-FBFF8250E3EF}"
+              description="將資料載入到使用資料庫資料表或檢視表且符合 ADO.NET 規範的資料庫。將資料載入到新的或現有的資料表。例如，使用 ODBC 的 ADO.NET 提供者將資料載入到 ODBC 目的地。"
+              usesDispositions="true"
+              version="2"
+              contactInfo="將資料載入到使用資料庫資料表或檢視表且符合 ADO.NET 規範的資料庫。將資料載入到新的或現有的資料表。例如，使用 ODBC 的 ADO.NET 提供者將資料載入到 ODBC 目的地。;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; 著作權所有，並保留一切權利; http://www.microsoft.com/sql/support;2">
+              <properties>
+                <property
+                  name="TableOrViewName"
+                  dataType="System.String"
+                  description="目的地資料庫資料表名稱。"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version= 11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+                  expressionType="Notify">"dbo"."MIS_Stock"</property>
+                <property
+                  name="BatchSize"
+                  dataType="System.Int32"
+                  description="指定每個批次的資料列數目。預設值為 0，此值會使用相同的大小做為 SSIS 內部緩衝區。 "
+                  expressionType="Notify">0</property>
+                <property
+                  name="CommandTimeout"
+                  dataType="System.Int32"
+                  description="命令逾時之前的秒數。值為 0 表示無限逾時。 "
+                  expressionType="Notify">30</property>
+                <property
+                  name="UseBulkInsertWhenPossible"
+                  dataType="System.Boolean"
+                  description="指定是否使用 SqlBulkCopy 介面來改進大量插入作業的效能。只有某些提供者支援這個介面。"
+                  expressionType="Notify">true</property>
+                <property
+                  name="UserComponentTypeName"
+                  dataType="System.String">Microsoft.SqlServer.Dts.Pipeline.ADONETDestination, Microsoft.SqlServer.ADONETDest, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\庫存\ADO NET 目的地.Connections[IDbConnection]"
+                  name="IDbConnection"
+                  description="Managed 連接管理員"
+                  connectionManagerID="Package.ConnectionManagers[PFGWarehouseSSIS]"
+                  connectionManagerRefId="Package.ConnectionManagers[PFGWarehouseSSIS]" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入]"
+                  name="ADO NET 目的地輸入"
+                  hasSideEffects="true"
+                  errorRowDisposition="FailComponent">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].Columns[STK]"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[STK]"
+                      externalMetadataColumnId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[STK]"
+                      cachedName="STK"
+                      cachedDataType="wstr"
+                      cachedLength="4" />
+                    <inputColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].Columns[ODNO]"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[ODNO]"
+                      externalMetadataColumnId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[ODNO]"
+                      cachedName="ODNO"
+                      cachedDataType="wstr"
+                      cachedLength="7" />
+                    <inputColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].Columns[IT]"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[IT]"
+                      externalMetadataColumnId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[IT]"
+                      cachedName="IT"
+                      cachedDataType="wstr"
+                      cachedLength="1" />
+                    <inputColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].Columns[PDNO]"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[PDNO]"
+                      externalMetadataColumnId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[PDNO]"
+                      cachedName="PDNO"
+                      cachedDataType="wstr"
+                      cachedLength="39" />
+                    <inputColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].Columns[GD]"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[GD]"
+                      externalMetadataColumnId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[GD]"
+                      cachedName="GD"
+                      cachedDataType="wstr"
+                      cachedLength="2" />
+                    <inputColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].Columns[UN]"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[UN]"
+                      externalMetadataColumnId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[UN]"
+                      cachedName="UN"
+                      cachedDataType="wstr"
+                      cachedLength="2" />
+                    <inputColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].Columns[QTY]"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[QTY]"
+                      externalMetadataColumnId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[QTY]"
+                      cachedName="QTY"
+                      cachedDataType="numeric"
+                      cachedPrecision="9"
+                      cachedScale="1" />
+                    <inputColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].Columns[WGT]"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[WGT]"
+                      externalMetadataColumnId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[WGT]"
+                      cachedName="WGT"
+                      cachedDataType="numeric"
+                      cachedPrecision="9"
+                      cachedScale="1" />
+                    <inputColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].Columns[ARTS]"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[ARTS]"
+                      externalMetadataColumnId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[ARTS]"
+                      cachedName="ARTS"
+                      cachedDataType="numeric"
+                      cachedPrecision="6" />
+                    <inputColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].Columns[UNPKMTWGT]"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[UNPKMTWGT]"
+                      externalMetadataColumnId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[UNPKMTWGT]"
+                      cachedName="UNPKMTWGT"
+                      cachedDataType="numeric"
+                      cachedPrecision="8"
+                      cachedScale="4" />
+                    <inputColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].Columns[IKDAT]"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[IKDAT]"
+                      externalMetadataColumnId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[IKDAT]"
+                      cachedName="IKDAT"
+                      cachedDataType="wstr"
+                      cachedLength="7" />
+                    <inputColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].Columns[DLDAT]"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[DLDAT]"
+                      externalMetadataColumnId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[DLDAT]"
+                      cachedName="DLDAT"
+                      cachedDataType="wstr"
+                      cachedLength="7" />
+                    <inputColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].Columns[NRDLSHNO]"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[NRDLSHNO]"
+                      externalMetadataColumnId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[NRDLSHNO]"
+                      cachedName="NRDLSHNO"
+                      cachedDataType="wstr"
+                      cachedLength="8" />
+                    <inputColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].Columns[PRTMK1]"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[PRTMK1]"
+                      externalMetadataColumnId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[PRTMK1]"
+                      cachedName="PRTMK1"
+                      cachedDataType="wstr"
+                      cachedLength="1" />
+                    <inputColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].Columns[PRTMK2]"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[PRTMK2]"
+                      externalMetadataColumnId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[PRTMK2]"
+                      cachedName="PRTMK2"
+                      cachedDataType="wstr"
+                      cachedLength="1" />
+                    <inputColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].Columns[TXDAT]"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[TXDAT]"
+                      externalMetadataColumnId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[TXDAT]"
+                      cachedName="TXDAT"
+                      cachedDataType="wstr"
+                      cachedLength="7" />
+                    <inputColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].Columns[RESMK]"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[RESMK]"
+                      externalMetadataColumnId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[RESMK]"
+                      cachedName="RESMK"
+                      cachedDataType="wstr"
+                      cachedLength="1" />
+                    <inputColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].Columns[ONWQTY]"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[ONWQTY]"
+                      externalMetadataColumnId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[ONWQTY]"
+                      cachedName="ONWQTY"
+                      cachedDataType="numeric"
+                      cachedPrecision="9"
+                      cachedScale="1" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[Seq]"
+                      name="Seq"
+                      dataType="i4" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[STK]"
+                      name="STK"
+                      dataType="wstr"
+                      length="4" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[ODNO]"
+                      name="ODNO"
+                      dataType="wstr"
+                      length="7" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[IT]"
+                      name="IT"
+                      dataType="wstr"
+                      length="1" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[PDNO]"
+                      name="PDNO"
+                      dataType="wstr"
+                      length="39" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[GD]"
+                      name="GD"
+                      dataType="wstr"
+                      length="2" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[UN]"
+                      name="UN"
+                      dataType="wstr"
+                      length="2" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[QTY]"
+                      name="QTY"
+                      dataType="numeric"
+                      precision="9"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[WGT]"
+                      name="WGT"
+                      dataType="numeric"
+                      precision="9"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[ARTS]"
+                      name="ARTS"
+                      dataType="numeric"
+                      precision="6" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[UNPKMTWGT]"
+                      name="UNPKMTWGT"
+                      dataType="numeric"
+                      precision="8"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[IKDAT]"
+                      name="IKDAT"
+                      dataType="wstr"
+                      length="7" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[DLDAT]"
+                      name="DLDAT"
+                      dataType="wstr"
+                      length="7" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[NRDLSHNO]"
+                      name="NRDLSHNO"
+                      dataType="wstr"
+                      length="8" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[PRTMK1]"
+                      name="PRTMK1"
+                      dataType="wstr"
+                      length="1" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[PRTMK2]"
+                      name="PRTMK2"
+                      dataType="wstr"
+                      length="1" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[TXDAT]"
+                      name="TXDAT"
+                      dataType="wstr"
+                      length="7" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[RESMK]"
+                      name="RESMK"
+                      dataType="wstr"
+                      length="1" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入].ExternalColumns[ONWQTY]"
+                      name="ONWQTY"
+                      dataType="numeric"
+                      precision="9"
+                      scale="1" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\庫存\ADO NET 目的地.Outputs[ADO NET 目的地錯誤輸出]"
+                  name="ADO NET 目的地錯誤輸出"
+                  exclusionGroup="1"
+                  synchronousInputId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入]"
+                  isErrorOut="true">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\庫存\ADO NET 目的地.Outputs[ADO NET 目的地錯誤輸出].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      lineageId="Package\庫存\ADO NET 目的地.Outputs[ADO NET 目的地錯誤輸出].Columns[ErrorCode]"
+                      dataType="i4"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\庫存\ADO NET 目的地.Outputs[ADO NET 目的地錯誤輸出].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      lineageId="Package\庫存\ADO NET 目的地.Outputs[ADO NET 目的地錯誤輸出].Columns[ErrorColumn]"
+                      dataType="i4"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\庫存\庫存"
+              name="庫存"
+              componentClassID="{874F7595-FB5F-40FF-96AF-FBFF8250E3EF}"
+              description="使用對應的 .NET Framework 資料提供者取用來自 SQL Server、OLE DB、ODBC 或 Oracle 的資料。使用 Transact-SQL 陳述式定義結果集。例如，使用 .NET Framework Data Provider for SQL Server 從 SQL Server 擷取資料。"
+              usesDispositions="true"
+              version="4"
+              contactInfo="使用對應的 .NET Framework 資料提供者取用來自 SQL Server、OLE DB、ODBC 或 Oracle 的資料。使用 Transact-SQL 陳述式定義結果集。例如，使用 .NET Framework Data Provider for SQL Server 從 SQL Server 擷取資料。;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; 著作權所有，並保留一切權利; http://www.microsoft.com/sql/support;4">
+              <properties>
+                <property
+                  name="SqlCommand"
+                  dataType="System.String"
+                  description="指定擷取資料之元件所使用的 SQL 陳述式。"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+                  expressionType="Notify">SELECT * FROM uxug00p.v28gfa02_bi</property>
+                <property
+                  name="CommandTimeout"
+                  dataType="System.Int32"
+                  description="命令逾時之前的秒數。值為 0 表示無限逾時。">30</property>
+                <property
+                  name="AllowImplicitStringConversion"
+                  dataType="System.Boolean"
+                  description="指示是否要允許非字串外部資料行在輸出資料行以隱含方式轉換為字串。">true</property>
+                <property
+                  name="TableOrViewName"
+                  dataType="System.String"
+                  description="來源資料庫資料表名稱。"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version= 11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+                  expressionType="Notify"></property>
+                <property
+                  name="AccessMode"
+                  dataType="System.Int32"
+                  description="指定要擷取外部資料行資訊的模式"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter, Microsoft.SqlServer.ADONETSrc, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">2</property>
+                <property
+                  name="UserComponentTypeName"
+                  dataType="System.String">Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter, Microsoft.SqlServer.ADONETSrc, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\庫存\庫存.Connections[IDbConnection]"
+                  name="IDbConnection"
+                  description="Managed 連接管理員"
+                  connectionManagerID="Package.ConnectionManagers[MISUXUG00S2]"
+                  connectionManagerRefId="Package.ConnectionManagers[MISUXUG00S2]" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出]"
+                  name="ADO NET 來源輸出">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[STK]"
+                      name="STK"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[STK]"
+                      length="4"
+                      dataType="wstr"
+                      errorOrTruncationOperation="轉換"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[STK]" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[ODNO]"
+                      name="ODNO"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[ODNO]"
+                      length="7"
+                      dataType="wstr"
+                      errorOrTruncationOperation="轉換"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[ODNO]" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[IT]"
+                      name="IT"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[IT]"
+                      length="1"
+                      dataType="wstr"
+                      errorOrTruncationOperation="轉換"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[IT]" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[PDNO]"
+                      name="PDNO"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[PDNO]"
+                      length="39"
+                      dataType="wstr"
+                      errorOrTruncationOperation="轉換"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[PDNO]" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[GD]"
+                      name="GD"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[GD]"
+                      length="2"
+                      dataType="wstr"
+                      errorOrTruncationOperation="轉換"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[GD]" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[UN]"
+                      name="UN"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[UN]"
+                      length="2"
+                      dataType="wstr"
+                      errorOrTruncationOperation="轉換"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[UN]" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[QTY]"
+                      name="QTY"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[QTY]"
+                      precision="9"
+                      scale="1"
+                      dataType="numeric"
+                      errorOrTruncationOperation="轉換"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[QTY]" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[WGT]"
+                      name="WGT"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[WGT]"
+                      precision="9"
+                      scale="1"
+                      dataType="numeric"
+                      errorOrTruncationOperation="轉換"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[WGT]" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[ARTS]"
+                      name="ARTS"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[ARTS]"
+                      precision="6"
+                      dataType="numeric"
+                      errorOrTruncationOperation="轉換"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[ARTS]" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[UNPKMTWGT]"
+                      name="UNPKMTWGT"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[UNPKMTWGT]"
+                      precision="8"
+                      scale="4"
+                      dataType="numeric"
+                      errorOrTruncationOperation="轉換"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[UNPKMTWGT]" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[IKDAT]"
+                      name="IKDAT"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[IKDAT]"
+                      length="7"
+                      dataType="wstr"
+                      errorOrTruncationOperation="轉換"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[IKDAT]" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[DLDAT]"
+                      name="DLDAT"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[DLDAT]"
+                      length="7"
+                      dataType="wstr"
+                      errorOrTruncationOperation="轉換"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[DLDAT]" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[NRDLSHNO]"
+                      name="NRDLSHNO"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[NRDLSHNO]"
+                      length="8"
+                      dataType="wstr"
+                      errorOrTruncationOperation="轉換"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[NRDLSHNO]" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[PRTMK1]"
+                      name="PRTMK1"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[PRTMK1]"
+                      length="1"
+                      dataType="wstr"
+                      errorOrTruncationOperation="轉換"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[PRTMK1]" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[PRTMK2]"
+                      name="PRTMK2"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[PRTMK2]"
+                      length="1"
+                      dataType="wstr"
+                      errorOrTruncationOperation="轉換"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[PRTMK2]" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[TXDAT]"
+                      name="TXDAT"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[TXDAT]"
+                      length="7"
+                      dataType="wstr"
+                      errorOrTruncationOperation="轉換"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[TXDAT]" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[RESMK]"
+                      name="RESMK"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[RESMK]"
+                      length="1"
+                      dataType="wstr"
+                      errorOrTruncationOperation="轉換"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[RESMK]" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[ONWQTY]"
+                      name="ONWQTY"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].Columns[ONWQTY]"
+                      precision="9"
+                      scale="1"
+                      dataType="numeric"
+                      errorOrTruncationOperation="轉換"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[ONWQTY]" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[STK]"
+                      name="STK"
+                      dataType="wstr"
+                      length="4" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[ODNO]"
+                      name="ODNO"
+                      dataType="wstr"
+                      length="7" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[IT]"
+                      name="IT"
+                      dataType="wstr"
+                      length="1" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[PDNO]"
+                      name="PDNO"
+                      dataType="wstr"
+                      length="39" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[GD]"
+                      name="GD"
+                      dataType="wstr"
+                      length="2" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[UN]"
+                      name="UN"
+                      dataType="wstr"
+                      length="2" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[QTY]"
+                      name="QTY"
+                      dataType="numeric"
+                      precision="9"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[WGT]"
+                      name="WGT"
+                      dataType="numeric"
+                      precision="9"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[ARTS]"
+                      name="ARTS"
+                      dataType="numeric"
+                      precision="6" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[UNPKMTWGT]"
+                      name="UNPKMTWGT"
+                      dataType="numeric"
+                      precision="8"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[IKDAT]"
+                      name="IKDAT"
+                      dataType="wstr"
+                      length="7" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[DLDAT]"
+                      name="DLDAT"
+                      dataType="wstr"
+                      length="7" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[NRDLSHNO]"
+                      name="NRDLSHNO"
+                      dataType="wstr"
+                      length="8" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[PRTMK1]"
+                      name="PRTMK1"
+                      dataType="wstr"
+                      length="1" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[PRTMK2]"
+                      name="PRTMK2"
+                      dataType="wstr"
+                      length="1" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[TXDAT]"
+                      name="TXDAT"
+                      dataType="wstr"
+                      length="7" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[RESMK]"
+                      name="RESMK"
+                      dataType="wstr"
+                      length="1" />
+                    <externalMetadataColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源輸出].ExternalColumns[ONWQTY]"
+                      name="ONWQTY"
+                      dataType="numeric"
+                      precision="9"
+                      scale="1" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出]"
+                  name="ADO NET 來源錯誤輸出"
+                  isErrorOut="true">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[STK]"
+                      name="STK"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[STK]"
+                      length="4"
+                      dataType="wstr" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[ODNO]"
+                      name="ODNO"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[ODNO]"
+                      length="7"
+                      dataType="wstr" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[IT]"
+                      name="IT"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[IT]"
+                      length="1"
+                      dataType="wstr" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[PDNO]"
+                      name="PDNO"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[PDNO]"
+                      length="39"
+                      dataType="wstr" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[GD]"
+                      name="GD"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[GD]"
+                      length="2"
+                      dataType="wstr" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[UN]"
+                      name="UN"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[UN]"
+                      length="2"
+                      dataType="wstr" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[QTY]"
+                      name="QTY"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[QTY]"
+                      precision="9"
+                      scale="1"
+                      dataType="numeric" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[WGT]"
+                      name="WGT"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[WGT]"
+                      precision="9"
+                      scale="1"
+                      dataType="numeric" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[ARTS]"
+                      name="ARTS"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[ARTS]"
+                      precision="6"
+                      dataType="numeric" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[UNPKMTWGT]"
+                      name="UNPKMTWGT"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[UNPKMTWGT]"
+                      precision="8"
+                      scale="4"
+                      dataType="numeric" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[IKDAT]"
+                      name="IKDAT"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[IKDAT]"
+                      length="7"
+                      dataType="wstr" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[DLDAT]"
+                      name="DLDAT"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[DLDAT]"
+                      length="7"
+                      dataType="wstr" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[NRDLSHNO]"
+                      name="NRDLSHNO"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[NRDLSHNO]"
+                      length="8"
+                      dataType="wstr" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[PRTMK1]"
+                      name="PRTMK1"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[PRTMK1]"
+                      length="1"
+                      dataType="wstr" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[PRTMK2]"
+                      name="PRTMK2"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[PRTMK2]"
+                      length="1"
+                      dataType="wstr" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[TXDAT]"
+                      name="TXDAT"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[TXDAT]"
+                      length="7"
+                      dataType="wstr" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[RESMK]"
+                      name="RESMK"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[RESMK]"
+                      length="1"
+                      dataType="wstr" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[ONWQTY]"
+                      name="ONWQTY"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[ONWQTY]"
+                      precision="9"
+                      scale="1"
+                      dataType="numeric" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[ErrorCode]"
+                      dataType="i4"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      lineageId="Package\庫存\庫存.Outputs[ADO NET 來源錯誤輸出].Columns[ErrorColumn]"
+                      dataType="i4"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\庫存.Paths[ADO NET 來源輸出]"
+              name="ADO NET 來源輸出"
+              startId="Package\庫存\庫存.Outputs[ADO NET 來源輸出]"
+              endId="Package\庫存\ADO NET 目的地.Inputs[ADO NET 目的地輸入]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[條件約束]"
+      DTS:From="Package\刪掉資料"
+      DTS:To="Package\庫存"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="條件約束"
+      DTS:DTSID="{c3d7c411-b9f3-4287-b0f1-c02311d943d6}"
+      DTS:CreationName="" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--此 CDATA 區段包含封裝的配置資訊。此區段包括諸如 (x,y) 座標、寬度和長度等資訊。-->
+<!--如果您手動編輯此區段但出錯，則可加以刪除。 -->
+<!--封裝仍可正常載入，但先前的配置資訊會遺失，而設計師將在設計介面上自動重新排列元素。-->
+<Objects
+  Version="sql11">
+  <!--下面每個節點將包含不會影響執行階段行為的屬性。-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="129,42"
+          Id="Package\刪掉資料"
+          TopLeft="467.166647824977,173.571419652628" />
+        <NodeLayout
+          Size="105,42"
+          Id="Package\庫存"
+          TopLeft="479.166647824977,271.999986052514" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[條件約束]"
+          TopLeft="531.666647824977,215.571419652628">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.4285663998861"
+              Start="0,0"
+              End="0,48.9285663998861">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.9285663998861" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\庫存">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="172,42"
+          Id="Package\庫存\ADO NET 目的地"
+          TopLeft="143.166660937998,197.714275562034" />
+        <NodeLayout
+          Size="105,42"
+          Id="Package\庫存\庫存"
+          TopLeft="197.333325452275,55.642854248991" />
+        <EdgeLayout
+          Id="Package\庫存.Paths[ADO NET 來源輸出]"
+          TopLeft="249.833325452275,97.642854248991">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-20.6666645142774,100.071421313043"
+              Start="0,0"
+              End="-20.6666645142774,92.571421313043">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.0357106565215" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,46.0357106565215"
+                    Point2="0,50.0357106565215"
+                    Point3="-4,50.0357106565215" />
+                  <mssgle:LineSegment
+                    End="-16.6666645142774,50.0357106565215" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-16.6666645142774,50.0357106565215"
+                    Point2="-20.6666645142774,50.0357106565215"
+                    Point3="-20.6666645142774,54.0357106565215" />
+                  <mssgle:LineSegment
+                    End="-20.6666645142774,92.571421313043" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\庫存\ADO NET 目的地">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\庫存\庫存">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

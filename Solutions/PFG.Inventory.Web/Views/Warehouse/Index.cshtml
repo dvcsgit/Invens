@@ -1,0 +1,92 @@
+﻿@model PFG.Inventory.Web.ViewModels.BasicSettingWarehouseListViewModels
+@{
+    
+    var title = MenuUtils.GetPageTitle(HttpContext.Current);
+    UserModel userModel = ViewBag.UserModel;
+}
+
+@section BreadCrumbs{
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-wrench"></i>
+                <a href="@Url.Action("Index")">基礎資料管理</a>
+            </li>
+            <li class="active">
+                <i class="icon-group"></i>
+                @title
+            </li>
+        </ul>
+    </div>
+}
+@section PageHeader{
+}
+
+<div id="item-index">
+    <h3 class="header smaller lighter blue">@title</h3>
+    <p>
+        @if (userModel.Operation.HasFlag(EnumOperation.Create))
+        {
+            <button id="createBtn" class="btn btn-white btn-success btn-bold">
+                <i class="ace-icon fa fa-plus-circle bigger-120 green"></i>
+                新增
+            </button>
+        }
+    </p>
+
+    <div class="row">
+        <div class="col-sm-12">
+            
+            <hr />
+            <div id="divGridView">
+                @Html.Partial("_GridList", Model)
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+
+            $(".btn-edit").click(function (e) {
+                var link = $(this);
+                var url = link.attr("href");
+                commonjs.loadAndShowDialog(link, url, 500);
+                e.preventDefault();
+            });
+            $(".btn-delete").click(function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                var url = btn.attr("href");
+                $.Confirm("確定要刪除所選項目嗎!?", function () {
+                    $.get(url).done(function (json) {
+                        var json = json || {};
+                        if (json.success) {
+                            $.Alert("刪除成功!", function () {
+                                //$("#criteria-form").submit();
+                                //window.location = json.redirect;
+                                location.href = json.redirect;
+                            });
+                        } else if (json.errors) {
+                            $.Alert(json.errors);
+                        }
+                    }).fail(function (fail) {
+
+                        $.Alert("系統發生錯誤");
+                    });
+                });
+            }
+           );
+            $("#createBtn").click(function (e) {
+                var link = $(this);
+                var url = "@Url.Action("Create")";
+                commonjs.loadAndShowDialog(link, url, 500);
+                e.preventDefault();
+            });
+        });
+    </script>
+}

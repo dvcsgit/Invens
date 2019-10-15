@@ -1,0 +1,184 @@
+﻿
+
+.btn {
+    font-size: 13px;
+}
+label {
+    font-size: 13px;
+}
+
+.btn.btn-app.btn-xs {
+    font-size: 13px;
+}
+
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
+    font-size: 13px;
+}
+
+.dataTables_info {
+    font-size: 13px;
+}
+
+.alert {
+    font-size: 13px;
+}
+
+span.field-validation-error {
+    display: inline-block !important;
+    font-size: 11px;
+    padding: 4px 8px;
+    color: #FFF;
+    background: #B94A48;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.login-fields > .field > span.field-validation-error {
+    position: relative;
+    top: 5px;
+}
+
+.requestFailedResult {
+    display: inline-block !important;
+    font-size: 11px;
+    padding: 4px 8px;
+    color: #FFF;
+    background: #B94A48;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.35);
+    margin-bottom:5px;
+}
+
+.requestSuccessResult {
+    display: inline-block !important;
+    font-size: 11px;
+    padding: 4px 8px;
+    color: #FFF;
+    background: #47a447;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.35);
+    margin-bottom:5px;
+}
+
+.dataTables_scrollBody > .dataTable th[class*=sort]:after {
+    height:0;
+    content:none;
+}
+
+
+/*Custom*/
+
+.page-info{
+    font-weight: normal;
+
+}
+
+
+.json-error h4{
+    font-weight : bold;
+}
+
+
+.inline-control {
+    max-width: 200px;
+    display: inline-block;
+}
+
+
+.table th, .table td {
+    white-space: nowrap;
+}
+
+.page-header {
+    height: 80px;
+}
+
+/* queryForm */
+#queryForm th, #queryForm td {
+    padding: 3px;
+    line-height: 22px;
+}
+
+
+#queryForm label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 0px;
+    font-family: 微軟正黑體,"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+
+
+.tableInput {
+    width:100%;
+    display: table;
+    color: #666;
+}
+
+.tableInput th {
+    width:17%;
+    text-align:right;
+    padding: 8px;
+}
+
+.tableInput td {
+    width:33%;
+}
+
+/* login */
+.login-container{
+    margin-top:100px;
+}
+
+.login-layout
+{
+     
+}
+
+#login-box
+{
+    border-top:#ccc 1px solid;
+}
+
+
+/* styles for validation helpers */
+
+.field-validation-valid {
+    display: none;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+
+
+/*upload */
+#upload-result{
+    overflow-y:auto;
+    max-height:250px;
+    margin-bottom:10px;
+    
+}
+
+/*login content*/
+.login-container {
+    width: 415px;
+    margin: 0 auto;
+}
+
+/*select2 hight light match */
+.select2-match {
+    text-decoration: underline;
+    font-weight: bold;
+    color: #dd4814;
+}

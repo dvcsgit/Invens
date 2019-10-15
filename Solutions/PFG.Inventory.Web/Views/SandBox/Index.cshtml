@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+ <button id="testBtn" class="btn btn-white btn-success btn-bold">
+                <i class="ace-icon fa fa-plus-circle bigger-120 green"></i>
+                TEST
+</button>
+
+@section Scripts{
+
+    <script>
+        $(function () {
+
+            $("#testBtn").click(function (e) {
+                var btn = $(this);
+                var url = "@Url.Action("Show")";
+
+                commonjs.loadAndShowDialog(btn, url, 700);
+
+                e.preventDefault();
+            });
+
+        });
+    </script>
+
+}

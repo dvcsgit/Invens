@@ -1,0 +1,98 @@
+﻿
+@model PFG.Inventory.Web.ViewModels.ERPCompareListViewModels
+@{
+    Layout = null;
+    UserModel userModel = ViewBag.UserModel;
+    //var resultInfo = Model.GridList.Count() == 0 ? "" : string.Format(Resources.StrPagerInfo, Model.GridList.Count(), Model.GridList.First(), Model.GridList.Last());
+
+}
+
+<h5>
+    <small>資料結果 <span class="page-info">@*@resultInfo*@</span></small>
+</h5>
+
+<table class="table table-bordered table-striped table-hover dataTable">
+    <thead>
+        <tr>
+            <th colspan="5" class="text-center">基準日ERP</th>
+            <th colspan="5" class="text-center">比較日ERP</th>
+            <th colspan="3" class="text-center">差筆</th>
+        </tr>
+        <tr>
+            <th>產品批號</th>
+            <th>等級</th>
+            <th>
+                淨重
+            </th>
+            <th>毛重</th>
+            <th>箱數</th>
+            <th>產品批號</th>
+            <th>等級</th>
+            <th>
+                淨重
+            </th>
+            <th>毛重</th>
+            <th>箱數</th>
+            <th>淨重</th>
+            <th>毛重</th>
+            <th>箱數</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (Model.GridList != null && Model.GridList.Count > 0)
+        {
+            foreach (var item in Model.GridList)
+            {
+
+                <text>
+                    @if (item.Pointer == 1)
+                    {
+                        <tr>
+                            <td>@item.PDNO</td>
+                            <td>@item.GD</td>
+                            <td>@item.SumQTY</td>
+                            <td>@item.SumWGT</td>
+                            <td>@item.ARTS</td>
+                            <td>@item.PDNO_His</td>
+                            <td>@item.GD_His</td>
+                            <td>@item.SumQTY_His</td>
+                            <td>@item.SumWGT_His</td>
+                            <td>@item.ARTS_His</td>
+                            <td>@item.DiffQTY</td>
+                            <td>@item.DiffWGT</td>
+                            <td>@item.DiffARTS</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr style="color:red; font-weight:500;">
+                            <td>@item.PDNO</td>
+                            <td>@item.GD</td>
+                            <td>@item.SumQTY</td>
+                            <td>@item.SumWGT</td>
+                            <td>@item.ARTS</td>
+                            <td>@item.PDNO_His</td>
+                            <td>@item.GD_His</td>
+                            <td>@item.SumQTY_His</td>
+                            <td>@item.SumWGT_His</td>
+                            <td>@item.ARTS_His</td>
+                            <td>@item.DiffQTY</td>
+                            <td>@item.DiffWGT</td>
+                            <td>@item.DiffARTS</td>
+                        </tr>
+                    }
+                </text>
+
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="13">
+                    查無資料
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

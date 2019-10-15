@@ -1,0 +1,164 @@
+﻿@model PFG.Inventory.Web.ViewModels.DetailRoleViewModel
+@{
+    Layout = null;
+    ViewBag.Title = "詳細資料";
+    UserModel userModel = ViewBag.UserModel;
+    var attachStr = Newtonsoft.Json.JsonConvert.SerializeObject(Model.AllMenu.ToList());
+}
+
+<h3 class="header smaller lighter blue">
+     權限群組管理
+    <small>
+        <i class="ace-icon fa fa-angle-double-right"></i>
+        詳細資料
+    </small>
+</h3>
+
+
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="widget-box">
+            <div class="widget-header widget-header-flat">
+                <h4 class="widget-title smaller">
+                    <i class="ace-icon fa fa-quote-left smaller-80"></i>
+                    詳細資料
+                </h4>
+            </div>
+            <div class="widget-body">
+                <div class="widget-main">
+                    <!-- main content area -->
+                    <form id="detail-form" class="form-horizontal" role="form">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.RoleId, new { @class = "col-sm-2 control-label no-padding-right" })
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(x => x.RoleId, new { @class = "col-xs-10 col-sm-5 upper-input", disabled = "disabled" })
+                            </div>
+                            <div class="col-sm-offset-6"></div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.RoleName, new { @class = "col-sm-2 control-label no-padding-right" })
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(x => x.RoleName, new { @class = "col-xs-10 col-sm-5", disabled = "disabled" })
+                            </div>
+                            <div class="col-sm-offset-6"></div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Description, new { @class = "col-sm-2 control-label no-padding-right" })
+                            <div class="col-sm-4">
+                                @Html.TextAreaFor(x => x.Description, new { @class = "col-xs-10 col-sm-5", disabled = "disabled" })
+                            </div>
+                            <div class="col-sm-offset-6"></div>
+                        </div>
+
+
+                        <hr />
+                        <!-- tab area -->
+                        @Html.Partial("_TabArea",true)
+                        
+                        <div class="clearfix form-actions">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button id="btnCancel" class="btn" type="button">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    取消
+                                </button>
+                            </div>
+                        </div>
+                     
+
+
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        var initialData = @{ if(string.IsNullOrEmpty(attachStr)) {<text>[]</text>} else{<text>@Html.Raw(attachStr)</text>}};
+
+        var SiteMenuTopItem = function (data) {
+            
+            var self = this;
+            var obj = data.Value;
+            self.Name = obj.Name;
+            self.IsChecked = ko.observable(obj.IsChecked || false);
+            self.MenuId = obj.MenuId;
+            self.Icon = obj.Icon;
+            self.MenuOperations = ko.observableArray(ko.utils.arrayMap(obj.MenuOperations, function (item) {
+                return new MenuOpItem(item);
+            }));
+            self.Childrens = ko.observableArray(ko.utils.arrayMap(obj.Childrens, function (item) {
+                var tempObj = { Key: "test", Value: item };
+                return new SiteMenuTopItem(tempObj);
+            }));
+
+            //綁定全選
+            self.MenuAllChecked = ko.computed({
+                read: function () {
+                    
+                    var firstUnchecked = ko.utils.arrayFirst(self.Childrens(), function (item) {
+
+                        return item.MenuOpAllChecked() == false;
+                    });
+                    return firstUnchecked == null;
+                },
+                write: function (value) {
+                    ko.utils.arrayForEach(self.Childrens(), function (item) {
+                        item.MenuOpAllChecked(value);
+                    });
+                }
+            });
+
+            //綁定動作全選
+            self.MenuOpAllChecked = ko.computed({
+                read: function () {
+                    
+                    var firstUnchecked = ko.utils.arrayFirst(self.MenuOperations(), function (item) {
+                        
+                        return item.IsChecked() == false;
+                    });
+                    return firstUnchecked == null;
+                },
+                write: function (value) {
+                    ko.utils.arrayForEach(self.MenuOperations(), function (item) {
+                        item.IsChecked(value);
+                    });
+                }
+            });
+        }
+
+        var MenuOpItem = function (data) {
+            var self = this;
+            self.ChineseName = data.ChineseName;
+            self.IsChecked = ko.observable(data.IsChecked);
+            self.OperationId = data.OperationId;
+            self.PermissionOperationId = data.PermissionOperationId;
+        }
+
+        var viewModel = function (model) {
+            var self = this;
+            self.GridItems = ko.observableArray(ko.utils.arrayMap(model, function (item) {
+                return new SiteMenuTopItem(item);
+            }));
+        }
+        
+        ko.cleanNode($("#detail-form")[0]);
+        userModel = new viewModel(initialData);
+        ko.applyBindings(userModel, $("#detail-form")[0]);
+
+        //取消
+        $("#btnCancel").click(function (e) {
+            commonjs.goBack();
+            e.preventDefault();
+        })
+    });
+</script>

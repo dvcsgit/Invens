@@ -1,0 +1,253 @@
+﻿@model PFG.Inventory.Web.ViewModels.LoginViewModel
+@{
+    var title = SiteLibrary.AppSettings("SystemTitle");
+    Layout = "~/Views/Shared/_LayoutSingle.cshtml";
+}
+<div class="login-container">
+    <div class="center">
+        <h1>
+            @*<span class="grey" id="id-text2">@title</span>*@
+            <img src="@Url.Content("~/Content/images/logo.png")" alt="@title" />
+        </h1>
+    </div>
+
+    <div class="space-6"></div>
+
+    <div class="position-relative">
+        <div id="login-box" class="login-box visible widget-box no-border">
+            <div class="widget-body">
+                <div class="widget-main">
+                    <h4 class="header blue lighter bigger">
+                        人員登入
+                    </h4>
+
+                    <div class="space-6"></div>
+                    @using (Html.BeginForm("Index", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id="form-login", @class = "form-horizontal" }))
+                    {
+                        <fieldset>
+                            <label class="block clearfix">
+                                <span class="block input-icon input-icon-right">
+                                    @Html.TextBoxFor(x => x.Account, new { @class = "form-control" ,placeholder = "請輸入Notes ID" })
+                                    @Html.ValidationMessageFor(x => x.Account, "", new { @class = "text-danger"})
+                                    <i class="ace-icon fa fa-user"></i>
+                                </span>
+                            </label>
+
+                            <label class="block clearfix">
+                                <span class="block input-icon input-icon-right">
+                                    @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "請輸入密碼" })
+                                    <i class="ace-icon fa fa-lock"></i>
+                                </span>
+                            </label>
+
+                            <div class="space"></div>
+
+                            <div class="clearfix">
+                                <label class="inline">
+                                    <input type="checkbox" class="ace">
+                                    <span class="lbl"> 記住我的帳號</span>
+                                </label>
+
+                                <button id="btn-login" type="button" class="width-35 pull-right btn btn-sm btn-primary" data-loading-text="登入中...請稍後">
+                                    <i class="ace-icon fa fa-key"></i>
+                                    <span class="bigger-110">登入</span>
+                                </button>
+                            </div>
+
+                            <div class="space-4"></div>
+                        </fieldset>
+                        @Html.AntiForgeryToken()
+                    }
+                </div><!-- /.widget-main -->
+
+                <div class="toolbar clearfix">
+                    <div>
+                        <a href="@Url.Content(SiteLibrary.AppSettings("APKPath"))" class="forgot-password-link">
+                            <i class="ace-icon fa fa-android"></i>
+                            APK下載
+                        </a>
+                    </div>
+                    @*<div>
+                        <a href="#" data-target="#forgot-box" class="forgot-password-link">
+                            <i class="ace-icon fa fa-arrow-left"></i>
+                            忘記密碼!?
+                        </a>
+                    </div>*@
+
+                    @*<div>
+                        <a href="#" data-target="#signup-box" class="user-signup-link">
+                            註冊新帳號
+                            <i class="ace-icon fa fa-arrow-right"></i>
+                        </a>
+                    </div>*@
+                </div>
+            </div><!-- /.widget-body -->
+        </div><!-- /.login-box -->
+
+        <div id="forgot-box" class="forgot-box widget-box no-border">
+            <div class="widget-body">
+                <div class="widget-main">
+                    <h4 class="header red lighter bigger">
+                        <i class="ace-icon fa fa-key"></i>
+                        Retrieve Password
+                    </h4>
+
+                    <div class="space-6"></div>
+                    <p>
+                        Enter your email and to receive instructions
+                    </p>
+
+                    <form>
+                        <fieldset>
+                            <label class="block clearfix">
+                                <span class="block input-icon input-icon-right">
+                                    <input type="email" class="form-control" placeholder="Email">
+                                    <i class="ace-icon fa fa-envelope"></i>
+                                </span>
+                            </label>
+
+                            <div class="clearfix">
+                                <button type="button" class="width-35 pull-right btn btn-sm btn-danger">
+                                    <i class="ace-icon fa fa-lightbulb-o"></i>
+                                    <span class="bigger-110">Send Me!</span>
+                                </button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div><!-- /.widget-main -->
+
+                <div class="toolbar center">
+                    <a href="#" data-target="#login-box" class="back-to-login-link">
+                        Back to login
+                        <i class="ace-icon fa fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div><!-- /.widget-body -->
+        </div><!-- /.forgot-box -->
+
+        <div id="signup-box" class="signup-box widget-box no-border">
+            <div class="widget-body">
+                <div class="widget-main">
+                    <h4 class="header green lighter bigger">
+                        <i class="ace-icon fa fa-users blue"></i>
+                        New User Registration
+                    </h4>
+
+                    <div class="space-6"></div>
+                    <p> Enter your details to begin: </p>
+
+                    <form>
+                        <fieldset>
+                            <label class="block clearfix">
+                                <span class="block input-icon input-icon-right">
+                                    <input type="email" class="form-control" placeholder="Email">
+                                    <i class="ace-icon fa fa-envelope"></i>
+                                </span>
+                            </label>
+
+                            <label class="block clearfix">
+                                <span class="block input-icon input-icon-right">
+                                    <input type="text" class="form-control" placeholder="Username">
+                                    <i class="ace-icon fa fa-user"></i>
+                                </span>
+                            </label>
+
+                            <label class="block clearfix">
+                                <span class="block input-icon input-icon-right">
+                                    <input type="password" class="form-control" placeholder="Password">
+                                    <i class="ace-icon fa fa-lock"></i>
+                                </span>
+                            </label>
+
+                            <label class="block clearfix">
+                                <span class="block input-icon input-icon-right">
+                                    <input type="password" class="form-control" placeholder="Repeat password">
+                                    <i class="ace-icon fa fa-retweet"></i>
+                                </span>
+                            </label>
+
+                            <label class="block">
+                                <input type="checkbox" class="ace">
+                                <span class="lbl">
+                                    I accept the
+                                    <a href="#">User Agreement</a>
+                                </span>
+                            </label>
+
+                            <div class="space-24"></div>
+
+                            <div class="clearfix">
+                                <button type="reset" class="width-30 pull-left btn btn-sm">
+                                    <i class="ace-icon fa fa-refresh"></i>
+                                    <span class="bigger-110">Reset</span>
+                                </button>
+
+                                <button type="button" class="width-65 pull-right btn btn-sm btn-success">
+                                    <span class="bigger-110">Register</span>
+
+                                    <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                                </button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <div class="toolbar center">
+                    <a href="#" data-target="#login-box" class="back-to-login-link">
+                        <i class="ace-icon fa fa-arrow-left"></i>
+                        Back to login
+                    </a>
+                </div>
+            </div><!-- /.widget-body -->
+        </div><!-- /.signup-box -->
+    </div><!-- /.position-relative -->
+
+
+</div>
+
+@section Scripts {
+    <script>
+
+        $(function () {
+
+            $(document).on('click', '.toolbar a[data-target]', function (e) {
+                e.preventDefault();
+                var target = $(this).data('target');
+                $('.widget-box.visible').removeClass('visible');//hide others
+                $(target).addClass('visible');//show target
+            });
+
+            $("#btn-login").click(function (e) {
+                var btn = $(this);
+                var $form = $("#form-login");
+                if (!$form.valid || $form.valid()) {
+                    btn.button('loading');
+                    $.post($form.attr('action'), $form.serializeArray())
+                        .done(function (json) {
+                            var json = json || {};
+                            if (json.success) {
+                                location.href = json.returnUrl;
+                            } else if (json.errors) {
+                                commonjs.displayErrors($form, json.errors,true);
+                                
+                            }
+                            btn.button('reset');
+                        })
+                        .fail(function () {
+                            btn.button('reset');
+                        });
+                    
+                    
+                }
+                
+
+                e.preventDefault();
+            });
+        });
+
+    </script>
+}
+
+
+
+       

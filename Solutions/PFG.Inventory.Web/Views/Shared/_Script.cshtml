@@ -1,0 +1,54 @@
+﻿@{
+    //置放在頁面下端 為了讀取速度
+}
+
+
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='@Url.Content("~/Content/ace/assets/js/jquery.min.js")'>" + "<" + "/script>");
+</script>
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='@Url.Content("~/Content/ace/assets/js/jquery1x.min.js")'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+<script type="text/javascript">
+    if('ontouchstart' in document.documentElement) document.write("<script src='@Url.Content("~/Content/ace/assets/js/jquery.mobile.custom.min.js")'>"+"<"+"/script>");
+</script>
+<script src="@Url.Content("~/Content/ace/assets/js/bootstrap.min.js")"></script>
+
+
+
+<!-- ace scripts -->
+<script src="@Url.Content("~/Content/ace/assets/js/ace-elements.min.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/ace.min.js")"></script>
+
+
+@Scripts.Render("~/bundles/jqueryval")
+
+<!-- custom js -->
+<script src="@Url.Content("~/Scripts/commonjs.js")"></script>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+<!--select2-->
+<script src="@Url.Content("~/Scripts/select2/select2.min.js")"></script>
+<!-- inline scripts related to this page -->
+<!--customer js app-->
+@*<script src="@Url.Content("~/Scripts/app.js")"></script>*@
+<!--datepicker-->
+<script src="@Url.Content("~/Content/ace/assets/js/date-time/bootstrap-datepicker.min.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/date-time/locales/bootstrap-datepicker.zh-TW.js")"></script>
+
+
+
+
+
+
+		
+

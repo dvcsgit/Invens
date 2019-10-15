@@ -1,0 +1,97 @@
+﻿
+@model PFG.Inventory.Web.ViewModels.InventoryListViewModels
+@{
+    Layout = null;
+    UserModel userModel = ViewBag.UserModel;
+    var resultInfo = Model.GridList.TotalItemCount == 0 ? "" : string.Format(Resources.StrPagerInfo, Model.GridList.TotalItemCount, Model.GridList.FirstItemOnPage, Model.GridList.LastItemOnPage);
+    var percentage = Model.CapacityPercentage;
+}
+
+<h5>
+    <small>資料結果 <span class="page-info">@resultInfo</span></small>
+    
+    <small class="pull-right text-left text text-info bolder" style="padding-right:40px;"><span>淨重：@Model.SumNetWeight</span>
+    &nbsp;&nbsp;<span>毛重：@Model.SumGrossWeight</span>
+    &nbsp;&nbsp;<span>存放率：@percentage</span></small>
+</h5>
+<form id="grid-list-form">
+    <table class="table table-striped table-bordered table-hover dataTable">
+        <thead>
+            <tr>
+                <th width="5%" class="text-center">庫位</th>
+                <th class="text-center">箱號</th>
+                <th class="text-center">產品批號</th>
+                <th width="10%" class="text-center">等級</th>
+                <th width="10%" class="text-center">
+                    淨重
+                </th>
+                <th width="10%" class="text-center">
+                    毛重
+                </th>
+                <th width="25%" class="text-center">輸入註記</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model.GridList != null && Model.GridList.Count > 0)
+            {
+
+                for (int i=0;i<Model.GridList.Count;i++)
+                {
+
+                    <text>
+                        <tr>
+                            <td>@Model.GridList[i].Location</td>
+                            @*<td >@Model.GridList[i].BoxNumber</td>
+                                <td >@Model.GridList[i].ProductCode</td>*@
+                            <td>
+                                @Html.TextBoxFor(x => Model.GridList[i].BoxNumber, new { @class="editable-input input-large"})
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(x => Model.GridList[i].ProductCode, new { @class = "editable-input input-large" })
+                            </td>
+                            @*<td>@Model.GridList[i].Class</td>*@
+                            <td>@Html.TextBoxFor(x => Model.GridList[i].Class, new { @class = "editable-input input-sm" })</td>
+                            @*<td>@Model.GridList[i].NetWeight</td>
+                            <td>@Model.GridList[i].CrossWeight</td>*@
+                            <td>@Html.TextBoxFor(x => Model.GridList[i].NetWeight, new {@class="editable-input input-mini" })</td>
+                            <td>@Html.TextBoxFor(x => Model.GridList[i].CrossWeight, new { @class = "editable-input input-mini" })</td>
+                            <td>
+                                @*<input type="text" class="editable-input input-large" value="@Model.GridList[i].EnterFlag" placeholder="輸入註記" />*@
+                                @Html.TextBoxFor(x => Model.GridList[i].EnterFlag, new { @class = "editable-input input-large",@placeholder="輸入註記" })
+                                @Html.HiddenFor(x=>Model.GridList[i].OldBoxNumber)
+                            </td>
+
+                        </tr>
+
+                    </text>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="7">
+                        查無資料
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</form>
+<!-- hidden criteria -->
+@Html.Partial("_Criteria", Model)
+@Html.PagedListPager(Model.GridList, pageNo => Url.Action("Query", new
+{
+    pageNo,
+    Model.Parameters.PageSize,
+    Model.Parameters.WarehouseInfo,
+    Model.Parameters.Location,
+    Model.Parameters.ProductCode,
+    Model.Parameters.Class,
+    Model.Parameters.EnterFlag,
+    Model.Parameters.IsPointer
+}), SiteLibrary.GetDefaultPagerOptions(true))
+
+
+

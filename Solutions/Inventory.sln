@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.DataSource", "PFG.Inventory.DataSource\Inventory.DataSource.csproj", "{13CB28B6-B790-4FFF-9EA9-0006D898660E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F27D7445-3DA8-4F2A-8CA3-C6AEB4622CCF}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Data", "PFG.Inventory.Data\Inventory.Data.csproj", "{19FAF39E-CFB2-43AE-8370-C079E60D46F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{7D33858B-EE0D-4931-B685-8862A2952A62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Web.Library", "PFG.Inventory.Web.Library\Inventory.Web.Library.csproj", "{3573405D-AC3A-41AB-8398-69459811BE7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Domain", "PFG.Inventory.Domain\Inventory.Domain.csproj", "{7CD111B1-16F1-4129-91CF-262DF633855D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Base", "Base", "{26E2EA93-206A-4C1F-9B57-BDB3A575B727}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Web", "PFG.Inventory.Web\Inventory.Web.csproj", "{608C453C-4A85-42FD-A3E8-0660919D1DEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{13CB28B6-B790-4FFF-9EA9-0006D898660E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13CB28B6-B790-4FFF-9EA9-0006D898660E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13CB28B6-B790-4FFF-9EA9-0006D898660E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13CB28B6-B790-4FFF-9EA9-0006D898660E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19FAF39E-CFB2-43AE-8370-C079E60D46F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19FAF39E-CFB2-43AE-8370-C079E60D46F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19FAF39E-CFB2-43AE-8370-C079E60D46F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19FAF39E-CFB2-43AE-8370-C079E60D46F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3573405D-AC3A-41AB-8398-69459811BE7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3573405D-AC3A-41AB-8398-69459811BE7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3573405D-AC3A-41AB-8398-69459811BE7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3573405D-AC3A-41AB-8398-69459811BE7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CD111B1-16F1-4129-91CF-262DF633855D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CD111B1-16F1-4129-91CF-262DF633855D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CD111B1-16F1-4129-91CF-262DF633855D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CD111B1-16F1-4129-91CF-262DF633855D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{608C453C-4A85-42FD-A3E8-0660919D1DEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{608C453C-4A85-42FD-A3E8-0660919D1DEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{608C453C-4A85-42FD-A3E8-0660919D1DEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{608C453C-4A85-42FD-A3E8-0660919D1DEF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{13CB28B6-B790-4FFF-9EA9-0006D898660E} = {26E2EA93-206A-4C1F-9B57-BDB3A575B727}
+		{19FAF39E-CFB2-43AE-8370-C079E60D46F3} = {26E2EA93-206A-4C1F-9B57-BDB3A575B727}
+		{7CD111B1-16F1-4129-91CF-262DF633855D} = {26E2EA93-206A-4C1F-9B57-BDB3A575B727}
+		{608C453C-4A85-42FD-A3E8-0660919D1DEF} = {7D33858B-EE0D-4931-B685-8862A2952A62}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F8AED30E-B6A7-41BC-872E-7B0DABF32DD1}
+	EndGlobalSection
+EndGlobal

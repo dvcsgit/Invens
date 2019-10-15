@@ -1,0 +1,63 @@
+﻿
+@model PFG.Inventory.Web.ViewModels.OutBoundInventoryListViewModels
+@{
+    Layout = null;
+    UserModel userModel = ViewBag.UserModel;
+    var resultInfo = Model.DistinctGridList.TotalItemCount == 0 ? "" : string.Format(Resources.StrPagerInfo, Model.DistinctGridList.TotalItemCount, Model.DistinctGridList.FirstItemOnPage, Model.DistinctGridList.LastItemOnPage);
+}
+
+<h5>
+    <small>資料結果 <span class="page-info">@resultInfo</span></small>
+</h5>
+<table class="table table-striped table-bordered table-hover dataTable">
+    <thead>
+        <tr>
+            <th></th>
+            <th>編號</th>
+            <th>上傳時間</th>
+            <th>上傳人員</th>
+            <th>車次</th>
+            <th>是否已列印</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (Model.DistinctGridList != null && Model.DistinctGridList.Count > 0)
+        {
+
+            foreach (var item in Model.DistinctGridList)
+            {
+
+                <text>
+                    <tr>
+                        <td style="text-align:center"><input type="radio" name="exp" value="@item.Index" /></td>
+                        <td>@item.Index</td>
+                        <td>@item.DateUpload</td>
+                        <td>@item.UploadAccount</td>
+                        <td>@item.CarNo</td>
+                        <td>@item.PrintFlag</td>
+                    </tr>
+                </text>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7">
+                    查無資料
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<!-- hidden criteria -->
+@Html.Partial("_Criteria", Model)
+@Html.PagedListPager(Model.DistinctGridList, pageNo => Url.Action("Query", new
+{
+    pageNo,
+    Model.Parameters.PageSize,
+    Model.Parameters.WarehouseID,
+    Model.Parameters.DateUpload
+}), SiteLibrary.GetDefaultPagerOptions(true))

@@ -1,0 +1,46 @@
+﻿@{
+    Layout = null;
+}
+
+
+
+    <div class="modal-header">
+        <a class="close btn-close">×</a>
+        <h4 class="green"><i class="icon-pencil"></i> @ViewBag.Title</h4>
+    </div>
+    <div class="modal-body">
+        @Html.Raw(Html.ValidationSummaryWithContainer("儲存失敗. 請修正以下的錯誤後，再試一次."))
+        @using (Html.BeginForm("Save", "ProcessTag", null, FormMethod.Post, new { @id = "add-form", @class = "form-horizontal" }))
+        { 
+            <table id="modal-table" class="table">
+                
+                
+            </table>
+            @Html.AntiForgeryToken()
+        }
+ 
+    </div>
+    <div class="modal-footer">
+        <a id="btn-save" class="btn btn-primary">儲存</a>
+        <a data-bb-handler="button" class="btn btn-default btn-close"><i class="icon-remove"></i>&nbsp; 關閉</a>
+    </div>
+
+
+<script>
+    $(function () {
+
+        $("#btn-save").click(function (e) {
+            $.Alert("儲存成功", function () {
+                $("#showDialog").modal('hide');
+            });
+            e.preventDefault();
+        });
+
+        $(".btn-close").click(function (e) {
+            $("#showDialog").modal('hide');
+            e.preventDefault();
+        });
+    });
+    
+
+</script>

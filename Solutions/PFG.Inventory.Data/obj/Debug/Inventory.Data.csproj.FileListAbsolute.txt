@@ -1,0 +1,15 @@
+E:\GitRepository\pfg-inventory-server.git\Solutions\PFG.Inventory.Data\bin\Debug\PFG.Inventory.Data.dll.config
+E:\GitRepository\pfg-inventory-server.git\Solutions\PFG.Inventory.Data\bin\Debug\PFG.Inventory.Data.dll
+E:\GitRepository\pfg-inventory-server.git\Solutions\PFG.Inventory.Data\bin\Debug\PFG.Inventory.Data.pdb
+E:\GitRepository\pfg-inventory-server.git\Solutions\PFG.Inventory.Data\bin\Debug\EntityFramework.dll
+E:\GitRepository\pfg-inventory-server.git\Solutions\PFG.Inventory.Data\bin\Debug\EntityFramework.SqlServer.dll
+E:\GitRepository\pfg-inventory-server.git\Solutions\PFG.Inventory.Data\bin\Debug\PFG.Inventory.DataSource.dll
+E:\GitRepository\pfg-inventory-server.git\Solutions\PFG.Inventory.Data\bin\Debug\PFG.Inventory.DataSource.pdb
+E:\GitRepository\pfg-inventory-server.git\Solutions\PFG.Inventory.Data\bin\Debug\PFG.Inventory.DataSource.dll.config
+E:\GitRepository\pfg-inventory-server.git\Solutions\PFG.Inventory.Data\bin\Debug\EntityFramework.xml
+E:\GitRepository\pfg-inventory-server.git\Solutions\PFG.Inventory.Data\bin\Debug\EntityFramework.SqlServer.xml
+E:\GitRepository\pfg-inventory-server.git\Solutions\PFG.Inventory.Data\obj\Debug\Inventory.Data.csprojAssemblyReference.cache
+E:\GitRepository\pfg-inventory-server.git\Solutions\PFG.Inventory.Data\obj\Debug\Inventory.Data.csproj.CoreCompileInputs.cache
+E:\GitRepository\pfg-inventory-server.git\Solutions\PFG.Inventory.Data\obj\Debug\Inventory.Data.csproj.CopyComplete
+E:\GitRepository\pfg-inventory-server.git\Solutions\PFG.Inventory.Data\obj\Debug\PFG.Inventory.Data.dll
+E:\GitRepository\pfg-inventory-server.git\Solutions\PFG.Inventory.Data\obj\Debug\PFG.Inventory.Data.pdb
